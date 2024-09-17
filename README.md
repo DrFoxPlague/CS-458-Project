@@ -7,7 +7,7 @@ This project was developed by a small software engineering team as a semester pr
 ## Team Members
 | **Member** | **Role** |
 | ----------- | ----------- |
-| Kristian Redwine | Team Leader |
-| Dakota Donner |  |
-| Peter Ramos | Lead Designer |
+| Kristian Redwine | Team Leader / Documenter |
+| Dakota Donner | Lead Backend |
+| Peter Ramos | Lead Designer / Frontend |
 | Jacob Huckins |  |
