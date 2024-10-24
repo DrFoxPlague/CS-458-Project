@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "module": "src/index.ts",
+  "scripts": {
+    "prestart": "tsc --noEmit",
+    "start:tsx": "tsx ./src/index.ts",
+    "start": "bun run ./src/index.ts",
+    "dev": "nodemon"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.9",
+    "nodemon": "^3.1.7",
+    "tsx": "^4.19.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "@apollo/subgraph": "^2.9.3",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
+    "mongoose": "^8.7.2"
+  }
+}
