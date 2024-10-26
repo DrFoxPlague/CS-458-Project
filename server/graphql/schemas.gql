@@ -1,0 +1,37 @@
+scalar Date
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    address: String!
+    grade: String!
+    dob: Date!
+    bdg_coll: [Badge]!
+}
+
+type Staff {
+    id: ID!
+    name: String!
+    email: String!
+    phone_num: String!
+}
+
+type Badge {
+    id: ID!
+    bdg_name: String!
+    bdg_type: String!
+}
+
+type Exhibit {
+    id: ID!
+    ex_name: String!
+}
+
+type Game {
+    id: ID!
+    game_type: String!
+}
+
+# TO-DO:
+# create queries and mutations
