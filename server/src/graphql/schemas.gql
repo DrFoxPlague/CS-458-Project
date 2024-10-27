@@ -1,6 +1,13 @@
 # SCALARS AND INPUTS
 # ------
 scalar Date
+scalar Media
+
+input ExhibitContentInput {
+    title: String
+    body: String
+    media: Media
+}
 # ------
 
 type User {
@@ -37,6 +44,7 @@ type ExhibitContent {
 type Exhibit {
     id: ID!
     ex_name: String!
+    content: ExhibitContent!
 }
 
 type Game {
@@ -50,6 +58,7 @@ type Query {
     getStaff(id: ID!): Staff!
     getStaffMembers: [Staff]!
     getBadge(id: ID!): Badge!
+    getBadges: [Badge]!
     getExhibit(id: ID!): Exhibit!
     getExhibits: [Exhibit]!
     getGame(id: ID!): Game! 
@@ -107,4 +116,5 @@ type Mutation {
 }
 
 # TO-DO:
-# create queries and mutations
+#   finish mutations
+#   link Game to Exhibit somehow
