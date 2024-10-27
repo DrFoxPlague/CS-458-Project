@@ -1,0 +1,110 @@
+# SCALARS AND INPUTS
+# ------
+scalar Date
+# ------
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    address: String!
+    grade: String!
+    dob: Date!
+    bdg_coll: [Badge]!
+}
+
+type Staff {
+    id: ID!
+    name: String!
+    email: String!
+    phone_num: String!
+}
+
+type Badge {
+    id: ID!
+    bdg_name: String!
+    bdg_type: String!
+}
+
+type ExhibitContent {
+    title: String
+    body: String
+    image: String
+    audio: String
+    video: String
+}
+
+type Exhibit {
+    id: ID!
+    ex_name: String!
+}
+
+type Game {
+    id: ID!
+    game_type: String!
+}
+
+type Query {
+    getUser(id: ID!): User!
+    getUsers: [User]!
+    getStaff(id: ID!): Staff!
+    getStaffMembers: [Staff]!
+    getBadge(id: ID!): Badge!
+    getExhibit(id: ID!): Exhibit!
+    getExhibits: [Exhibit]!
+    getGame(id: ID!): Game! 
+}
+
+type Mutation {
+    # User Mutations
+    createUser(name: String!,
+               email: String!,
+               address: String!,
+               grade: String!,
+               dob: Date!): User!
+
+    deleteUser(id: ID!): User!
+
+    updateUser(id: ID!,
+               name: String,
+               email: String,
+               address: String,
+               grade: String,
+               dob: Date): User!
+
+    # Staff Mutations
+    createStaff(name: String!,
+                email: String!,
+                phone_num: String!): Staff!
+    
+    deleteStaff(id: ID!): Staff!
+
+    updateStaff(id: ID!,
+                name: String,
+                email: String,
+                phone_num: String): Staff!
+
+    # Badge Mutations
+    createBadge(bdg_name: String!, bdg_type: String!): Badge!
+
+    deleteBadge(id: ID!): Badge!
+
+    updateBadge(id: ID!, bdg_name: String, bdg_type: String): Badge!
+
+    # Exhibit Mutations
+    createExhibit(): Exhibit!
+
+    deleteExhibit(): Exhibit!
+
+    updateExhibit(): Exhibit!
+
+    # Game Mutations
+    createGame(): Game!
+
+    deleteGame(): Game!
+
+    updateGame(): Game!
+}
+
+# TO-DO:
+# create queries and mutations
