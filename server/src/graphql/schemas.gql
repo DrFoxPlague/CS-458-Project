@@ -8,6 +8,12 @@ input ExhibitContentInput {
     body: String
     media: Media
 }
+
+input QuestionInput {
+    question: String
+    choices: [String]
+    answer: String
+}
 # ------
 
 
@@ -56,6 +62,13 @@ type Game {
     id: ID!
     game_name: String!
     game_type: String!
+}
+
+type TriviaQuestion {
+    id: ID!
+    question: String!
+    choices: [String]!
+    answer: String!
 }
 
 
@@ -136,18 +149,28 @@ type Mutation {
 
     updateExhibit(
         id: ID!,
-        ex_name: String!,
+        ex_name: String,
         content: ExhibitContentInput
     ): Exhibit!
 
     # Game Mutations
-    createGame(): Game!
+    createGame(game_name: String!, game_type: String!): Game!
 
-    deleteGame(): Game!
+    deleteGame(id: ID!): Game!
 
-    updateGame(): Game!
+    updateGame(id: ID!, game_name: String, game_type: String): Game!
+
+    createTrivQues(
+        input: QuestionInput!
+    ): TriviaQuestion!
+
+    deleteTrivQues(id: ID!): TriviaQuestion!
+
+    updateTrivQues(
+        id: ID!,
+        input: QuestionInput
+    ): TriviaQuestion!
 }
 
 # TO-DO:
-#   - finish mutations
 #   - expand game schemas to accomodate different game types
