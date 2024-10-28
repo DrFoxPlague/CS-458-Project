@@ -75,32 +75,40 @@ type Query {
 
 type Mutation {
     # User Mutations
-    createUser(name: String!,
-               email: String!,
-               address: String!,
-               grade: String!,
-               dob: Date!): User!
+    createUser(
+        name: String!,
+        email: String!,
+        address: String!,
+        grade: String!,
+        dob: Date!
+    ): User!
 
     deleteUser(id: ID!): User!
 
-    updateUser(id: ID!,
-               name: String,
-               email: String,
-               address: String,
-               grade: String,
-               dob: Date): User!
+    updateUser(
+        id: ID!,
+        name: String,
+        email: String,
+        address: String,
+        grade: String,
+        dob: Date
+    ): User!
 
     # Staff Mutations
-    createStaff(name: String!,
-                email: String!,
-                phone_num: String!): Staff!
+    createStaff(
+        name: String!,
+        email: String!,
+        phone_num: String!
+    ): Staff!
     
     deleteStaff(id: ID!): Staff!
 
-    updateStaff(id: ID!,
-                name: String,
-                email: String,
-                phone_num: String): Staff!
+    updateStaff(
+        id: ID!,
+        name: String,
+        email: String,
+        phone_num: String
+    ): Staff!
 
     # Badge Mutations
     createBadge(bdg_name: String!, bdg_type: String!): Badge!
