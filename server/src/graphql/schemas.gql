@@ -53,14 +53,23 @@ type Game {
 }
 
 type Query {
+    # User Queries
     getUser(id: ID!): User!
     getUsers: [User]!
+
+    # Staff Queries
     getStaff(id: ID!): Staff!
     getStaffMembers: [Staff]!
+
+    # Badge Queries
     getBadge(id: ID!): Badge!
     getBadges: [Badge]!
+
+    # Exhibit Queries
     getExhibit(id: ID!): Exhibit!
     getExhibits: [Exhibit]!
+
+    # Game Queries
     getGame(id: ID!): Game! 
 }
 
