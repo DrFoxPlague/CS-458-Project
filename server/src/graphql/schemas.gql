@@ -58,10 +58,14 @@ type Exhibit {
 }
 
 # Game Schemas - NEEDS TO BE EXPANDED!!!
-type Game {
+interface BaseGame {
     id: ID!
     game_name: String!
     game_type: String!
+}
+
+type TriviaGame implements BaseGame {
+    questions: [TriviaQuestion]!
 }
 
 type TriviaQuestion {
@@ -71,6 +75,7 @@ type TriviaQuestion {
     answer: String!
 }
 
+union Game = TriviaGame     # use pipe operator to extend different game types
 
 type Query {
     # User Queries
