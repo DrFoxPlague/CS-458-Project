@@ -2,6 +2,6 @@
 
 // To-Do:
 /* 
-    - Create mongoose schemas under /server/src/schemas     **I HAVEN'T MADE THE FOLDER YET, LOL!!!**
+    - Create mongoose schemas under /server/src/schemas
     - Actually create the resolvers... :P
 */
