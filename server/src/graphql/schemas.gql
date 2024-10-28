@@ -65,6 +65,9 @@ interface BaseGame {
 }
 
 type TriviaGame implements BaseGame {
+    id: ID!
+    game_name: String!
+    game_type: String!
     questions: [TriviaQuestion]!
 }
 
