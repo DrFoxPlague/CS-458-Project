@@ -1,6 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 
-const uri = process.env.DB || "";
+const URI = process.env.DB || "";
 
 export default class CITSDatabase {
     readonly connection: typeof mongoose;
@@ -10,7 +10,7 @@ export default class CITSDatabase {
     }
 
     connect = () => {
-        this.connection.connect(uri)
+        this.connection.connect(URI)
             .then(() => {
                 console.log("Connected to MongoDB! :)");
             })
