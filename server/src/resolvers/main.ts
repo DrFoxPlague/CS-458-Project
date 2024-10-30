@@ -5,3 +5,7 @@
     - Create mongoose schemas under /server/src/schemas
     - Actually create the resolvers... :P
 */
+
+export const resolvers = {
+
+};
