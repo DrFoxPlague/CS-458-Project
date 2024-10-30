@@ -151,6 +151,7 @@ export default {
             _: any,
             { id }: { id: string }
         ) => {
+            
             const exhibit = await ExhibitModel.findById(id);
 
             if (!exhibit) {
