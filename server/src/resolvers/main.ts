@@ -6,6 +6,13 @@
     - Actually create the resolvers... :P
 */
 
-export const resolvers = {
+import exhibits from "./exhibits";
 
+export const resolvers = {
+    Query: {
+        ...exhibits.Query
+    },
+    Mutation: {
+        ...exhibits.Mutation
+    }
 };
