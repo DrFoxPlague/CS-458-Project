@@ -110,7 +110,8 @@ type Mutation {
         email: String!,
         address: String!,
         grade: String!,
-        dob: Date!
+        dob: Date!,
+        token: String!
     ): User!
 
     deleteUser(id: ID!): User!
