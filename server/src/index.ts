@@ -9,8 +9,9 @@ import Database from "./util/Database";
 import { readFileSync } from "fs";
 import { resolvers } from "./resolvers/main";
 
-const PORT = process.env.PORT || 3000;  // assign a random port if 3000 is not available
+const PORT = process.env.PORT || 4000;  // assign a random port if 4000 is not available
 const app = express();
+const db = new Database();
 
 const typeDefs = gql(
     readFileSync("src/graphql/schemas.gql", {
@@ -23,6 +24,7 @@ const server = new ApolloServer({
 });
 
 await server.start();
+await db.connect();
 
 app.use(
     '/graphql',
