@@ -147,5 +147,43 @@ export default {
                 });
         }
         },
+        deleteExhibit: async (
+            _: any,
+            { id }: { id: string }
+        ) => {
+            const exhibit = await ExhibitModel.findById(id);
+
+            if (!exhibit) {
+                throw new GraphQLError("Exhibit not found!", {
+                    extensions: {
+                        errors: [
+                            {
+                                type: "not_found",
+                                message: "Exhibit not found! Please check the ID."
+                            }
+                        ]
+                    }
+                });
+            }
+
+            try {
+                await ExhibitModel.deleteOne({ _id: id });
+            } 
+            catch (error) {
+                throw new GraphQLError("Error deleting exhibit!", {
+                    extensions: {
+                        errors: [
+                            {
+                                type: "database",
+                                message: "Error deleting exhibit!"
+                            }
+                        ]
+                    }
+                });
+        } 
+        return exhibit;
+    }
+
+       
     }
 }
