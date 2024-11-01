@@ -3,7 +3,7 @@
 import exhibits from "./exhibits";
 import staff from "./staff";
 import user from "./user";
-import games from "./games";
+import games from "./games/games";
 import badges from "./badges";
 
 export const resolvers = {
