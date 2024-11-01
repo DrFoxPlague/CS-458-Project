@@ -134,7 +134,7 @@ export default {
 
             try {
                 await exhibit.save();
-            } catch (saveError) {
+            } catch (err) {
                 throw new GraphQLError("Error saving exhibit! Please try again.", {
                     extensions: {
                         errors: [
@@ -151,7 +151,7 @@ export default {
             _: any,
             { id }: { id: string }
         ) => {
-            
+
             const exhibit = await ExhibitModel.findById(id);
 
             if (!exhibit) {
@@ -168,9 +168,9 @@ export default {
             }
 
             try {
-                await ExhibitModel.deleteOne({ _id: id });
+                await ExhibitModel.findByIdAndDelete({ id });
             } 
-            catch (error) {
+            catch (err) {
                 throw new GraphQLError("Error deleting exhibit!", {
                     extensions: {
                         errors: [
