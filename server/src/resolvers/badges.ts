@@ -28,9 +28,23 @@ export default {
     Mutation: {
         createBadge: async (
             _: any,
-            { bdg_name, bdg_type }: { bdg_name: string, bdg_type: string }
+            { bdg_name, bdg_type }: { bdg_name: string, bdg_type: string },
+            context: { staff: { id: string } }
         ) => {
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
                 const badge = new BadgeModel({
                     id: GenID.badge(),
                     bdg_name,
@@ -49,10 +63,24 @@ export default {
         updateBadge: async (
             _: any,
             { id, bdg_name, bdg_type }: 
-            { id: string, bdg_name?: string, bdg_type?: string }
+            { id: string, bdg_name?: string, bdg_type?: string },
+            context: { staff: { id: string } }
         ) => {
 
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
                 const badge = await BadgeModel.findById(id);
 
                 if (!badge) {
@@ -82,9 +110,23 @@ export default {
 
         deleteBadge: async (
             _: any,
-            { id }: { id: string }
+            { id }: { id: string },
+            context: { staff: { id: string } }
         ) => {
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
                 const badge = await BadgeModel.findById(id);
 
                 if (!badge) {
