@@ -84,6 +84,7 @@ export default {
                 throw err;
             }
         },
+        
         updateExhibit: async (
             _: any,
             { id, ex_name, content }:
