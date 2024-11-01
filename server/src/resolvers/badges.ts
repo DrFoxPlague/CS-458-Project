@@ -30,30 +30,20 @@ export default {
             _: any,
             { bdg_name, bdg_type }: { bdg_name: string, bdg_type: string }
         ) => {
-            const badge = new BadgeModel({
-                id: GenID.badge(),
-                bdg_name,
-                bdg_type
-            });
-
-            try{
-                await badge.save();
-            }
-            catch (err) {
-                throw new GraphQLError("Error saving badge! Please try again.", {
-                    extensions: {
-                        errors: [
-                            {
-                                type: "database",
-                                message: "Error saving badge! Please try again."
-                            }
-                        ]
-                    }
+            try {
+                const badge = new BadgeModel({
+                    id: GenID.badge(),
+                    bdg_name,
+                    bdg_type
                 });
-            }
-            
+                    
+                await badge.save();
+                
+                return badge;
 
-            return badge;
+            } catch (err) {
+                throw err;
+            }
         },
 
         updateBadge: async (
@@ -61,82 +51,62 @@ export default {
             { id, bdg_name, bdg_type }: 
             { id: string, bdg_name?: string, bdg_type?: string }
         ) => {
-            const badge = await BadgeModel.findById(id);
 
-            if (!badge) {
-                throw new GraphQLError("Badge not found!", {
-                    extensions: {
-                        errors: [
-                            {
-                                type: "not_found",
-                                message: "Badge not found! Please check the ID."
-                            }
-                        ]
-                    }
-                });
-            }
+            try {
+                const badge = await BadgeModel.findById(id);
 
-            if (bdg_name) {
-                badge.bdg_name = bdg_name;
-            }
-            if (bdg_type) {
-                badge.bdg_type = bdg_type;
-            }
+                if (!badge) {
+                    throw new GraphQLError("Badge not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "not_found",
+                                    message: "Badge not found! Please check the ID."
+                                }
+                            ]
+                        }
+                    });
+                }
 
-            try{
+                if (bdg_name) badge.bdg_name = bdg_name;
+                if (bdg_type) badge.bdg_type = bdg_type;
+
                 await badge.save();
-            }
-            catch (err) {
-                throw new GraphQLError("Error saving badge! Please try again.", {
-                    extensions: {
-                        errors: [
-                            {
-                                type: "database",
-                                message: "Error saving badge! Please try again."
-                            }
-                        ]
-                    }
-                });
-            }
 
-            return badge;
+                return badge;
+
+            } catch (err) {
+                throw err;
+            }
         },
 
         deleteBadge: async (
             _: any,
             { id }: { id: string }
         ) => {
-            const badge = await BadgeModel.findById(id);
-
-            if (!badge) {
-                throw new GraphQLError("Badge not found!", {
-                    extensions: {
-                        errors: [
-                            {
-                                type: "not_found",
-                                message: "Badge not found! Please check the ID."
-                            }
-                        ]
-                    }
-                });
-            }
-
             try {
-                await BadgeModel.findByIdAndDelete(id);
-            } catch(err) {
-                throw new GraphQLError("Error deleting badge!", {
-                    extensions: {
-                        errors: [
-                            {
-                                type: "database",
-                                message: "Error deleting badge!"
-                            }
-                        ]
-                    }
-                });
-            }
+                const badge = await BadgeModel.findById(id);
 
-            return badge;
+                if (!badge) {
+                    throw new GraphQLError("Badge not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "not_found",
+                                    message: "Badge not found! Please check the ID."
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                await BadgeModel.findByIdAndDelete(id);
+
+                return badge;
+
+            } catch (err) {
+                throw err;
+            }
         }
     }
 }
