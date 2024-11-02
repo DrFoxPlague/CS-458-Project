@@ -17,7 +17,7 @@ input QuestionInput {
 
 input GameDataInput {
     game_name: String
-    game_type: String
+    game_subject: String
 }
 # ------
 
@@ -66,13 +66,13 @@ type Exhibit {
 interface BaseGame {
     id: ID!
     game_name: String!
-    game_type: String!
+    game_subject: String!
 }
 
 type TriviaGame implements BaseGame {
     id: ID!
     game_name: String!
-    game_type: String!
+    game_subject: String!
     questions: [TriviaQuestion]!
 }
 

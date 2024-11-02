@@ -10,7 +10,7 @@ const GameSchema = new Schema({
         type: String,
         required: true
     },
-    game_type: {
+    game_subject: {
         type: String,
         required: true
     },
