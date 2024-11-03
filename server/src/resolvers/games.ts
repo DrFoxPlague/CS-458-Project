@@ -50,7 +50,11 @@ export default {
         getGames: async () => (await GameModel.find()).toSorted()
     },
     Mutation: {
-        createGame: async () => {
+        createGame: async (
+            _: any,
+            { input }: { input: GameDataInput },
+            context: { staff: { id: string } }
+        ) => {
             try {
 
             } catch (err) {
