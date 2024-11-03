@@ -16,4 +16,8 @@ export default class GenID {
     static game() {
         return this.generateId('game');
     }
+
+    static triviaQuestion() {
+        return this.generateId('triviaQuestion')
+    }
 }
