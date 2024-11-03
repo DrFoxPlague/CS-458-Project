@@ -31,6 +31,10 @@ const ExhibitSchema = new Schema({
             type: String,
             default: null
         }
+    },
+    game: {
+        type: String,
+        default: null
     }
 })
 

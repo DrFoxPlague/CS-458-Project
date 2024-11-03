@@ -60,6 +60,7 @@ type Exhibit {
     id: ID!
     ex_name: String!
     content: ExhibitContent!
+    game: Game
 }
 
 # Game Schemas - NEEDS TO BE EXPANDED!!!

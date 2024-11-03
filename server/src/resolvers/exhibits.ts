@@ -73,7 +73,8 @@ export default {
                         title,
                         body,
                         media: mediaFile
-                    }
+                    },
+                    game: null
                 });
 
                 await exhibit.save();
