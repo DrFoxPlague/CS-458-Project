@@ -1,4 +1,4 @@
-import GameModel from "../schemas/Game";
+import GameModel from "../schemas/Game/Game";
 import { GraphQLError } from "graphql";
 
 type GameDataInput = {
