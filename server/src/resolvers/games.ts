@@ -88,25 +88,114 @@ export default {
 
         updateGame: async (
             _: any,
-            {id, input}: {id: string, input: Partial<GameDataInput>}
+            { id, input }: { id: string, input: Partial<GameDataInput> },
+            context: { staff: { id: string } }
         ) => {
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                const game = await GameModel.findById(id);
+
+                if (!game) {
+                    throw new GraphQLError("Game not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "game",
+                                    message: "Game not found!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                if (input.game_name) game.game_name = input.game_name;
+                if (input.game_subject) game.game_subject = input.game_subject;
+
+                await game.save();
+
+                return game;
 
             } catch (err) {
                 throw err;
             }
         },
 
-        deleteGame: async () => {
+        deleteGame: async (
+            _: any,
+            { id }: { id: string },
+            context: { staff: { id: string } }
+        ) => {
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                const game = GameModel.findById(id);
+
+                if (!game) {
+                    throw new GraphQLError("Game not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "game",
+                                    message: "Game not found!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                await GameModel.findByIdAndDelete(id);
+
+                return game;
 
             } catch (err) {
                 throw err;
             }
         },
 
-        createTrivQues: async () => {
+        createTrivQues: async (
+            { input }: { input: QuestionInput },
+            context: { staff: { id: string } }
+        ) => {
             try {
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                const triviaQuestion = new TriviaQuestionModel({
+                    
+                });
 
             } catch (err) {
                 throw err;
@@ -122,6 +211,22 @@ export default {
         },
 
         deleteTrivQues: async () => {
+            try {
+
+            } catch (err) {
+                throw err;
+            }
+        },
+
+        addQuestion: async () => {
+            try {
+
+            } catch (err) {
+                throw err;
+            }
+        },
+
+        removeQuestion: async () => {
             try {
 
             } catch (err) {
