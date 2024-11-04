@@ -21,4 +21,4 @@ export const resolvers = {
         ...games.Mutation,
         ...badges.Mutation
     }
-};
+} as any;
