@@ -56,13 +56,40 @@ export default {
             context: { staff: { id: string } }
         ) => {
             try {
+                // check if user is staff
+                if (!context.staff) {
+                    throw new GraphQLError("Not authenticated!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message: "Staff member not authenticated!"
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                const game = new GameModel({
+                    id: GenID.game(),
+                    game_name: input.game_name,
+                    game_subject: input.game_subject,
+                    questions: []
+                });
+
+                await game.save();
+
+                return game;
 
             } catch (err) {
                 throw err;
             }
         },
 
-        updateGame: async () => {
+        updateGame: async (
+            _: any,
+            {id, input}: {id: string, input: Partial<GameDataInput>}
+        ) => {
             try {
 
             } catch (err) {
