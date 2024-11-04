@@ -22,7 +22,7 @@ const TriviaQuestionSchema = new Schema({
 
 export type ITriviaQuestion = InferSchemaType<typeof TriviaQuestionSchema>;
 
-const TriviaQuestionModel = model("games", TriviaQuestionSchema);
+const TriviaQuestionModel = model("trivia questions", TriviaQuestionSchema);
 
 export type TriviaQuestionDocument = ReturnType<(typeof TriviaQuestionModel)["hydrate"]>;
 

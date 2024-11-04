@@ -180,9 +180,9 @@ type Mutation {
         input: QuestionInput
     ): TriviaQuestion!
 
-    addQuestion(gameId: ID!, question: Question!): Game!
+    addQuestion(gameId: ID!, question: ID!): Game!
 
-    removeQuestion(gameId: ID!, question: Question!): Game!
+    removeQuestion(gameId: ID!, question: ID!): Game!
 }
 
 # TO-DO:
