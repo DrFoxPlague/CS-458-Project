@@ -6,6 +6,10 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import mongoose from "mongoose";
 import Database from "./util/Database";
+import session from "express-session"; // session management
+import passport from "passport"; // authentication tool
+import "./util/Auth";
+import { googleAuth, googleCallback, isAuthenticated } from "./util/Auth"; // import route handlers
 import { readFileSync } from "fs";
 import { resolvers } from "./resolvers/main";
 
@@ -26,6 +30,22 @@ const server = new ApolloServer({
 
 await server.start();
 await db.connect();
+
+// Session and Passport initialization
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || "defaultsecret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: { secure: false }, // Set `secure: true` in production with HTTPS
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Authentication routes
+app.get("/auth/google", googleAuth);
+app.get("/auth/google/callback", googleCallback);
 
 app.use(
     '/graphql',
