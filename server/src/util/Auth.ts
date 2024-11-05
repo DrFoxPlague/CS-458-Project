@@ -1,7 +1,5 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-
-// Use type-only import for Request, Response, and NextFunction
 import type { Request, Response, NextFunction } from "express";
 
 // Configure Google OAuth strategy
@@ -25,11 +23,18 @@ passport.use(
 
 // Serialize user into session
 passport.serializeUser((user: any, done) => {
-    done(null, user);
+    // on new session, store some information in the session 
+    // we probably only want to store user.id to keep it lightweight and not store things like passwords in the session
+    done(null, user.id);
 });
 
 // Deserialize user from session
 passport.deserializeUser((user: any, done) => {
+    // this function is used to get the full user details from the database using the details stored in the session
+    // this function might need to be async / have an async database call
+
+    // use an incoming user id to fetch relevant information and build a user object to return
+
     done(null, user);
 });
 
