@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import type { Request, Response, NextFunction } from "express";
+import UserModel from "../schemas/User";
 
 // Configure Google OAuth strategy
 passport.use(
@@ -11,12 +12,36 @@ passport.use(
             callbackURL: "/auth/google/callback",
         },
         async (accessToken, refreshToken, profile, done) => {
-            const user = {
+            try {
+                // find user
+                let user = await UserModel.findOne({ id: profile.id });
+
+                // if they don't exist, create one
+                if (!user) {
+                    user = new UserModel({
+                        id: profile.id,
+                        name: profile.displayName,
+                        email: profile.emails?.[0].value,
+                        address: "",
+                        grade: "",
+                        dob: null,
+                        bdg_coll: []
+                    });
+
+                    await user.save();
+                }
+
+                return done(null, user); // Pass user data to serializeUser
+
+            } catch (err) {
+                throw err;
+            }
+            
+            /*const user = {
                 googleId: profile.id,
                 displayName: profile.displayName,
                 email: profile.emails?.[0].value,
-            };
-            return done(null, user); // Pass user data to serializeUser
+            };*/
         }
     )
 );
