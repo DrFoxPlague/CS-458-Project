@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import gql from "graphql-tag";
 import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
+import { expressMiddleware, type ExpressContextFunctionArgument } from "@apollo/server/express4";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import mongoose from "mongoose";
 import Database from "./util/Database";
@@ -24,8 +24,7 @@ const typeDefs = gql(
 );
 
 const server = new ApolloServer({
-    schema: buildSubgraphSchema({typeDefs, resolvers}
-    )
+    schema: buildSubgraphSchema({typeDefs, resolvers})
 });
 
 await server.start();
@@ -51,7 +50,15 @@ app.use(
     '/graphql',
     cors(),
     express.json(),
-    expressMiddleware(server)
+    expressMiddleware(server, {
+        context: async ({ req }: ExpressContextFunctionArgument) => {
+            return {
+                auth: !!req.user,
+                user: req.user || null,
+                req
+            }
+        }
+    })
 );
 
 app.listen(PORT, () => {
