@@ -14,10 +14,6 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    address: {
-        type: String,
-        required: true,
-    },
     grade: {
         type: String,
         required: true,

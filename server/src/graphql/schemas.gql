@@ -21,7 +21,6 @@ input GameDataInput {
 }
 
 input UserInput {
-    address: String
     grade: String
     dob: Date
 }
@@ -33,7 +32,6 @@ type User {
     id: ID!
     name: String!
     email: String!
-    address: String!
     grade: String!
     dob: Date!
     bdg_coll: [Badge]!
@@ -119,7 +117,6 @@ type Mutation {
         id: ID!,
         name: String,
         email: String,
-        address: String,
         grade: String,
         dob: Date
     ): User!

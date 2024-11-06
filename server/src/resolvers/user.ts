@@ -1,6 +1,10 @@
 import UserModel from "../schemas/User";
 import { GraphQLError } from "graphql";
 
+type UserInput = {
+    
+}
+
 export default {
     Query: {
         getUser: async (_: any, { id }: { id: string }) => {
@@ -30,19 +34,7 @@ export default {
             // other args here
         ) => {
             try {
-                const user = new UserModel({
-                    id,
-                    name,
-                    email,
-                    address,
-                    grade,
-                    dob,
-                    bdg_coll: []
-                });
-
-                await user.save();
-
-                return user;
+                
 
             } catch (err) {
                 throw err;
