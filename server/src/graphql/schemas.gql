@@ -19,6 +19,12 @@ input GameDataInput {
     game_name: String
     game_subject: String
 }
+
+input UserInput {
+    address: String
+    grade: String
+    dob: Date
+}
 # ------
 
 
@@ -105,14 +111,7 @@ type Query {
 
 type Mutation {
     # User Mutations
-    createUser(
-        name: String!,
-        email: String!,
-        address: String!,
-        grade: String!,
-        dob: Date!,
-        token: String!
-    ): User!
+    createUser(input: UserInput): User!
 
     deleteUser(id: ID!): User!
 
