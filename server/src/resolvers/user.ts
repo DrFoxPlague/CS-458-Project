@@ -76,8 +76,38 @@ export default {
             }
         },
 
-        updateUser: async () => {},
+        updateUser: async (
+            _: any
+        ) => {
+            console.log("updateUser still a WIP!")
+        },
 
-        deleteUser: async () => {}
+        deleteUser: async (
+            _: any,
+            { id }: { id: string }
+        ) => {
+            try {
+                const user = await UserModel.findById(id);
+
+                if (!user) {
+                    throw new GraphQLError("User not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "not_found",
+                                    message: "User not found! Please check the ID."
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                await UserModel.findByIdAndDelete(id);
+
+                return user;
+            } catch (err) {
+                throw err;
+            }
+        }
     }
 }
