@@ -53,13 +53,25 @@ passport.serializeUser((user: any, done) => {
 });
 
 // Deserialize user from session
-passport.deserializeUser((user: any, done) => {
+passport.deserializeUser(async (id: string, done) => {
     // this function is used to get the full user details from the database using the details stored in the session
     // this function might need to be async / have an async database call
 
     // use an incoming user id to fetch relevant information and build a user object to return
 
-    done(null, user);
+    try {
+        const user = await UserModel.findById(id);
+
+        if (!user) {
+            return done(new Error("User not found!"));
+        }
+
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+
+    
 });
 
 // Middleware to check if a user is authenticated
