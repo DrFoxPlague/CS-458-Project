@@ -17,6 +17,16 @@ export const CreateOrUpdateUser = gql`
     }
 `;
 
+export const DeleteUser = gql`
+    mutation DeleteUser($id: ID!) {
+        createUser(id: $id) {
+            id
+            name
+            email
+        }
+    }
+`;
+
 export const GetUser = gql`
     query GetUser($id: ID!) {
         getUser(id: $id) {
@@ -35,7 +45,7 @@ export const GetUser = gql`
 `;
 
 export const GetUsers = gql`
-    query GetUsers($id: ID!) {
+    query GetUsers {
         getUsers {
             id
             name
