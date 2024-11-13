@@ -53,11 +53,11 @@ export default {
         createGame: async (
             _: any,
             { input }: { input: GameDataInput },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean }
         ) => {
             try {
                 // check if user is staff
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -89,10 +89,10 @@ export default {
         updateGame: async (
             _: any,
             { id, input }: { id: string, input: Partial<GameDataInput> },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -135,10 +135,10 @@ export default {
         deleteGame: async (
             _: any,
             { id }: { id: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -178,10 +178,10 @@ export default {
         createTrivQues: async (
             _: any,
             { input }: { input: QuestionInput },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -213,10 +213,10 @@ export default {
         updateTrivQues: async (
             _: any,
             { id, input }: { id: string, input: QuestionInput },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -260,10 +260,10 @@ export default {
         deleteTrivQues: async (
             _: any,
             { id }: { id: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -303,10 +303,10 @@ export default {
         addQuestion: async (
             _: any,
             { gameId, question }: { gameId: string, question: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -348,10 +348,10 @@ export default {
         removeQuestion: async (
             _: any,
             { gameId, question }: { gameId: string, question: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [

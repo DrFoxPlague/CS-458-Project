@@ -24,7 +24,8 @@ passport.use(
                         email: profile.emails?.[0].value,
                         grade: "",
                         dob: null,
-                        bdg_coll: []
+                        bdg_coll: [],
+                        is_staff: false
                     });
 
                     await user.save();

@@ -25,6 +25,11 @@ const UserSchema = new Schema({
     bdg_coll: {
         type: Array,
         required: true,
+    },
+    is_staff: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 

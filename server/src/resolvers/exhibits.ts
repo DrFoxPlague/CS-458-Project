@@ -30,10 +30,10 @@ export default {
             _: any, 
             {ex_name, content}: {ex_name: string, content: 
                 {title?: string, body?: string, media?: any}},
-            context: { staff: { id: string } }
+            context: { isStaff: boolean }
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -91,10 +91,10 @@ export default {
             { id, ex_name, content }:
             { id: string, ex_name?: string, content?: 
                 {title?: string, body?: string, media?: any}},
-            context: { staff: { id: string } }    
+            context: { isStaff: boolean }    
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -143,10 +143,10 @@ export default {
         deleteExhibit: async (
             _: any,
             { id }: { id: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean }
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [

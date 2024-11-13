@@ -13,6 +13,7 @@ export const CreateOrUpdateUser = gql`
                 bdg_name
                 bdg_type
             }
+            is_staff
         }
     }
 `;
@@ -40,6 +41,7 @@ export const GetUser = gql`
                 bdg_name
                 bdg_type
             }
+            is_staff
         }
     }
 `;
@@ -57,6 +59,7 @@ export const GetUsers = gql`
                 bdg_name
                 bdg_type
             }
+            is_staff
         }
     }
 `;

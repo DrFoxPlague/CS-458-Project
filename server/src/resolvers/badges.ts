@@ -29,10 +29,10 @@ export default {
         createBadge: async (
             _: any,
             { bdg_name, bdg_type }: { bdg_name: string, bdg_type: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -64,11 +64,11 @@ export default {
             _: any,
             { id, bdg_name, bdg_type }: 
             { id: string, bdg_name?: string, bdg_type?: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
 
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
@@ -111,10 +111,10 @@ export default {
         deleteBadge: async (
             _: any,
             { id }: { id: string },
-            context: { staff: { id: string } }
+            context: { isStaff: boolean } 
         ) => {
             try {
-                if (!context.staff) {
+                if (!context.isStaff) {
                     throw new GraphQLError("Not authenticated!", {
                         extensions: {
                             errors: [
