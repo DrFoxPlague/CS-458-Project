@@ -59,6 +59,7 @@ app.use(
 app.get("/auth/google", googleAuth);
 app.get("/auth/google/callback", googleCallback);
 
+// Set up middleware and GQL
 app.use(
     '/graphql',
     cors(),
