@@ -27,16 +27,19 @@ const PORT = process.env.PORT || 4000;  // assign a random port if 4000 is not a
 const app = express();
 const db = new Database();
 
+// Connect to GQL file
 const typeDefs = gql(
     readFileSync("src/graphql/schemas.gql", {
         encoding: "utf-8",
     })
 );
 
+// set up Apollo Server
 const server = new ApolloServer({
     schema: buildSubgraphSchema({typeDefs, resolvers})
 });
 
+// Start essential connections
 await server.start();
 await db.connect();
 
@@ -47,10 +50,10 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: { secure: false }, // Set `secure: true` in production with HTTPS
-    })
+    }),
+    passport.initialize(),
+    passport.session()
 );
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Authentication routes
 app.get("/auth/google", googleAuth);
