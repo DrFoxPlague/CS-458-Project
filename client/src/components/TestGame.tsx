@@ -54,7 +54,8 @@ export const TestGame = () => {
       setScore(score + 1);
       setQuestionIndex(questionIndex + 1);
     } else {
-      alert("Incorrect answer! Try again.");
+      setScore(score + 0);
+      setQuestionIndex(questionIndex + 1);
     }
   };
 
