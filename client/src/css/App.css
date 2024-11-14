@@ -12,7 +12,7 @@ body {
   background-color: var(--light-brown); 
   color: var(--deep-brown);
 }
-q
+
 .container {
   display: flex;
   justify-content: center;
