@@ -1,5 +1,5 @@
 //peter
-import './App.css';
+import './css/App.css';
 import { TestGame } from './components/TestGame';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
