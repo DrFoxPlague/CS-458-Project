@@ -137,3 +137,10 @@ body {
     opacity: 1;
   }
 }
+
+.ErrorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
