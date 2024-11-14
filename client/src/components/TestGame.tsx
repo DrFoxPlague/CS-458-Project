@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from './cits-logo.png';
 
 export const TestGame = () => {
   // Set the selectedSubject type to be a key of subjects
@@ -31,11 +32,14 @@ export const TestGame = () => {
       setFeedbackType(null);
       setIsAnsweringDisabled(false);
       setQuestionIndex((prevIndex) => prevIndex + 1);
-    }, 1500); // Show feedback for 1.5 seconds before moving to the next question
+    }, 2000); // Show feedback for 2 seconds
   };
 
   return (
     <div className="container">
+      <div className="logo-container">
+        <img src={logo} alt="CITS Logo" className="logo" />
+      </div>
       {selectedSubject && questionIndex < subjects[selectedSubject].length ? (
         <div className="quiz">
           <h2>{selectedSubject} Quiz</h2>
