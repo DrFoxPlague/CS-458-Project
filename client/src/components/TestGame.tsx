@@ -1,4 +1,3 @@
-//peter
 import { useState } from 'react';
 
 // Define the subjects type
@@ -41,6 +40,8 @@ export const TestGame = () => {
   const [selectedSubject, setSelectedSubject] = useState<keyof typeof subjects | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [isAnsweringDisabled, setIsAnsweringDisabled] = useState(false);
 
   const handleSubjectSelect = (subject: keyof typeof subjects) => {
     setSelectedSubject(subject);
@@ -48,15 +49,25 @@ export const TestGame = () => {
     setScore(0);
   };
 
+  const [feedbackType, setFeedbackType] = useState<'correct' | 'wrong' | null>(null);
+
   const handleAnswer = (answer: string) => {
+    setIsAnsweringDisabled(true);
     const currentQuestion = subjects[selectedSubject!][questionIndex];
     if (answer === currentQuestion.correct) {
-      setScore(score + 1);
-      setQuestionIndex(questionIndex + 1);
+      setFeedback("Correct!");
+      setFeedbackType('correct');
+      setScore((prevScore) => prevScore + 1);
     } else {
-      setScore(score + 0);
-      setQuestionIndex(questionIndex + 1);
+      setFeedback(`Wrong! The correct answer was: ${currentQuestion.correct}`);
+      setFeedbackType('wrong');
     }
+    setTimeout(() => {
+      setFeedback(null);
+      setFeedbackType(null);
+      setIsAnsweringDisabled(false);
+      setQuestionIndex((prevIndex) => prevIndex + 1);
+    }, 1500);
   };
 
   if (selectedSubject && questionIndex < subjects[selectedSubject].length) {
@@ -65,9 +76,17 @@ export const TestGame = () => {
       <div className="quiz">
         <h2>{selectedSubject} Quiz</h2>
         <p>{question}</p>
+        {feedback && (
+          <p className={`feedback ${feedbackType}`}>{feedback}</p>
+        )}
         <div className="options">
           {options.map((option) => (
-            <button key={option} onClick={() => handleAnswer(option)}>
+            <button
+              key={option}
+              onClick={() => handleAnswer(option)}
+              disabled={isAnsweringDisabled} 
+              // Disable button when in feedback mode
+            >
               {option}
             </button>
           ))}
@@ -99,4 +118,4 @@ export const TestGame = () => {
       </div>
     </div>
   );
-}
+};

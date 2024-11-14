@@ -47,3 +47,26 @@
 .options button:hover {
   background-color: #ddd;
 }
+
+.feedback {
+  font-weight: bold;
+  margin-top: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.feedback.correct {
+  color: green;
+}
+
+.feedback.wrong {
+  color: red;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
