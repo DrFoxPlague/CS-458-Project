@@ -31,7 +31,7 @@ export const TestGame = () => {
       setFeedbackType(null);
       setIsAnsweringDisabled(false);
       setQuestionIndex((prevIndex) => prevIndex + 1);
-    }, 1500); // Show feedback for 1.5 seconds before moving to the next question
+    }, 2000); // Show feedback for 2 seconds
   };
 
   return (

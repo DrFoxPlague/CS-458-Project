@@ -8,11 +8,11 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif; /* Update font later */
+  font-family: 'Lucida Handwriting', cursive; /* Update font later */
   background-color: var(--light-brown); 
   color: var(--deep-brown);
 }
-
+q
 .container {
   display: flex;
   justify-content: center;
