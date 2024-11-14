@@ -1,4 +1,82 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+
+export const TestGame = () => {
+  // Set the selectedSubject type to be a key of subjects
+  const [selectedSubject, setSelectedSubject] = useState<keyof typeof subjects | null>(null);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedbackType, setFeedbackType] = useState<'correct' | 'wrong' | null>(null);
+  const [isAnsweringDisabled, setIsAnsweringDisabled] = useState(false);
+
+  const handleSubjectSelect = (subject: keyof typeof subjects) => {
+    setSelectedSubject(subject);
+    setQuestionIndex(0);
+    setScore(0);
+  };
+
+  const handleAnswer = (answer: string) => {
+    setIsAnsweringDisabled(true);
+    const currentQuestion = subjects[selectedSubject!][questionIndex];
+    if (answer === currentQuestion.correct) {
+      setFeedback("Correct!");
+      setFeedbackType('correct');
+      setScore((prevScore) => prevScore + 1);
+    } else {
+      setFeedback(`Wrong! The correct answer was: ${currentQuestion.correct}`);
+      setFeedbackType('wrong');
+    }
+    setTimeout(() => {
+      setFeedback(null);
+      setFeedbackType(null);
+      setIsAnsweringDisabled(false);
+      setQuestionIndex((prevIndex) => prevIndex + 1);
+    }, 1500); // Show feedback for 1.5 seconds before moving to the next question
+  };
+
+  return (
+    <div className="container">
+      {selectedSubject && questionIndex < subjects[selectedSubject].length ? (
+        <div className="quiz">
+          <h2>{selectedSubject} Quiz</h2>
+          <p>{subjects[selectedSubject][questionIndex].question}</p>
+          {feedback && (
+            <p className={`feedback ${feedbackType}`}>{feedback}</p>
+          )}
+          <div className="options">
+            {subjects[selectedSubject][questionIndex].options.map((option) => (
+              <button
+                key={option}
+                onClick={() => handleAnswer(option)}
+                disabled={isAnsweringDisabled}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+          <p>Your score: {score}</p>
+        </div>
+      ) : selectedSubject && questionIndex >= subjects[selectedSubject].length ? (
+        <div className="quiz">
+          <h2>Congratulations! You completed the {selectedSubject} Quiz!</h2>
+          <p>Your final score: {score}/{subjects[selectedSubject].length}</p>
+          <button onClick={() => setSelectedSubject(null)}>Back to Subjects</button>
+        </div>
+      ) : (
+        <div className="subject-selection">
+          <h1>Choose a Subject</h1>
+          <div className="subject-grid">
+            {Object.keys(subjects).map((subject) => (
+              <button key={subject} onClick={() => handleSubjectSelect(subject as keyof typeof subjects)}>
+                {subject}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 // Define the subjects type
 type Subject = {
@@ -33,89 +111,4 @@ const subjects: Subjects = {
     { question: "What language is used for web development?", options: ["JavaScript", "Python", "C++", "Java"], correct: "JavaScript" },
     { question: "What is the main purpose of RAM?", options: ["Long-term storage", "Executing code", "Temporary storage", "Graphics rendering"], correct: "Temporary storage" },
   ],
-};
-
-export const TestGame = () => {
-  // Set the selectedSubject type to be a key of subjects
-  const [selectedSubject, setSelectedSubject] = useState<keyof typeof subjects | null>(null);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [feedback, setFeedback] = useState<string | null>(null);
-  const [isAnsweringDisabled, setIsAnsweringDisabled] = useState(false);
-
-  const handleSubjectSelect = (subject: keyof typeof subjects) => {
-    setSelectedSubject(subject);
-    setQuestionIndex(0);
-    setScore(0);
-  };
-
-  const [feedbackType, setFeedbackType] = useState<'correct' | 'wrong' | null>(null);
-
-  const handleAnswer = (answer: string) => {
-    setIsAnsweringDisabled(true);
-    const currentQuestion = subjects[selectedSubject!][questionIndex];
-    if (answer === currentQuestion.correct) {
-      setFeedback("Correct!");
-      setFeedbackType('correct');
-      setScore((prevScore) => prevScore + 1);
-    } else {
-      setFeedback(`Wrong! The correct answer was: ${currentQuestion.correct}`);
-      setFeedbackType('wrong');
-    }
-    setTimeout(() => {
-      setFeedback(null);
-      setFeedbackType(null);
-      setIsAnsweringDisabled(false);
-      setQuestionIndex((prevIndex) => prevIndex + 1);
-    }, 1500);
-  };
-
-  if (selectedSubject && questionIndex < subjects[selectedSubject].length) {
-    const { question, options } = subjects[selectedSubject][questionIndex];
-    return (
-      <div className="quiz">
-        <h2>{selectedSubject} Quiz</h2>
-        <p>{question}</p>
-        {feedback && (
-          <p className={`feedback ${feedbackType}`}>{feedback}</p>
-        )}
-        <div className="options">
-          {options.map((option) => (
-            <button
-              key={option}
-              onClick={() => handleAnswer(option)}
-              disabled={isAnsweringDisabled} 
-              // Disable button when in feedback mode
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        <p>Your score: {score}</p>
-      </div>
-    );
-  }
-
-  if (selectedSubject && questionIndex >= subjects[selectedSubject].length) {
-    return (
-      <div className="quiz">
-        <h2>Congratulations! You completed the {selectedSubject} Quiz!</h2>
-        <p>Your final score: {score}/{subjects[selectedSubject].length}</p>
-        <button onClick={() => setSelectedSubject(null)}>Back to Subjects</button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="subject-selection">
-      <h1>Choose a Subject</h1>
-      <div className="subject-grid">
-        {Object.keys(subjects).map((subject) => (
-          <button key={subject} onClick={() => handleSubjectSelect(subject as keyof typeof subjects)}>
-            {subject}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
 };

@@ -1,3 +1,28 @@
+:root {
+  --light-brown: #d2b48c;   /* Light tan for backgrounds */
+  --medium-brown: #a67b5b;  /* Medium brown for buttons */
+  --dark-brown: #8b4513;    /* Darker brown for hover and accents */
+  --deep-brown: #5c3a1e;    /* Deep brown for text */
+  --highlight-brown: #f0e2c1; /* Highlight for correct answers */
+  --error-brown: #f5c6a5;    /* Lighter red-brown for incorrect answers */
+}
+
+body {
+  font-family: 'Arial', sans-serif; /* Update the font if desired */
+  background-color: var(--light-brown); /* Set a warm background */
+  color: var(--deep-brown); /* Use deep brown for the main text color */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  width: 100vw; /* Full width of the viewport */
+  box-sizing: border-box; /* Ensures padding is included in width and height calculations */
+  padding: 1rem; /* Padding to prevent content from touching screen edges */
+}
+
 .subject-selection {
   text-align: center;
 }
@@ -14,17 +39,31 @@
   font-size: 1.5rem;
   border: none;
   cursor: pointer;
-  background-color: #e0e0e0;
+  background-color: var(--medium-brown);
+  color: white;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .subject-grid button:hover {
-  background-color: #ccc;
+  background-color: var(--dark-brown);
+}
+
+.subject-grid button:focus {
+  outline: 3px solid #007BFF; /* Optional outline for accessibility */
+  outline-offset: 4px;
+}
+
+.subject-grid button:active {
+  transform: scale(0.98);
 }
 
 .quiz {
   text-align: center;
+  padding: 2rem; /* Improved spacing */
+  background-color: var(--highlight-brown);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for a floating effect */
 }
 
 .options {
@@ -39,27 +78,41 @@
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background-color: var(--medium-brown);
+  color: white;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .options button:hover {
-  background-color: #ddd;
+  background-color: var(--dark-brown);
+}
+
+.options button:focus {
+  outline: 3px solid #007BFF; /* Optional outline for accessibility */
+  outline-offset: 4px;
+}
+
+.options button:active {
+  transform: scale(0.98);
 }
 
 .feedback {
   font-weight: bold;
   margin-top: 10px;
   animation: fadeIn 0.5s ease-in-out;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .feedback.correct {
   color: green;
+  background-color: var(--highlight-brown);
 }
 
 .feedback.wrong {
   color: red;
+  background-color: var(--error-brown);
 }
 
 @keyframes fadeIn {
