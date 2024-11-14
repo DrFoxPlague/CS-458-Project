@@ -12,16 +12,7 @@ import "./util/Auth";
 import { googleAuth, googleCallback, isAuthenticated } from "./util/Auth"; // import route handlers
 import { readFileSync } from "fs";
 import { resolvers } from "./resolvers/main";
-
-type User = {
-    id: string;
-    name: string;
-    email: string;
-    grade: string;
-    dob: Date | null;
-    bdg_coll: string[]; 
-    is_staff: boolean;
-}
+import type { User } from "./util/Types";
 
 const PORT = process.env.PORT || 4000;  // assign a random port if 4000 is not available
 const app = express();
