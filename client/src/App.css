@@ -1,16 +1,16 @@
 :root {
-  --light-brown: #d2b48c;   /* Light tan for backgrounds */
-  --medium-brown: #a67b5b;  /* Medium brown for buttons */
-  --dark-brown: #8b4513;    /* Darker brown for hover and accents */
-  --deep-brown: #5c3a1e;    /* Deep brown for text */
+  --light-brown: #d2b48c;   /* backgrounds */
+  --medium-brown: #a67b5b;  /* buttons */
+  --dark-brown: #8b4513;    /* hover and accents */
+  --deep-brown: #5c3a1e;    /* text */
   --highlight-brown: #f0e2c1; /* Highlight for correct answers */
   --error-brown: #f5c6a5;    /* Lighter red-brown for incorrect answers */
 }
 
 body {
-  font-family: 'Arial', sans-serif; /* Update the font if desired */
-  background-color: var(--light-brown); /* Set a warm background */
-  color: var(--deep-brown); /* Use deep brown for the main text color */
+  font-family: 'Arial', sans-serif; /* Update font later */
+  background-color: var(--light-brown); 
+  color: var(--deep-brown);
 }
 
 .container {
@@ -19,8 +19,8 @@ body {
   align-items: center;
   height: 100vh; /* Full height of the viewport */
   width: 100vw; /* Full width of the viewport */
-  box-sizing: border-box; /* Ensures padding is included in width and height calculations */
-  padding: 1rem; /* Padding to prevent content from touching screen edges */
+  box-sizing: border-box; 
+  padding: 1rem; /* Padding */
 }
 
 .subject-selection {
@@ -50,7 +50,7 @@ body {
 }
 
 .subject-grid button:focus {
-  outline: 3px solid #007BFF; /* Optional outline for accessibility */
+  outline: 3px solid #007BFF; /* Hit tab to navigate with keyboard!! */
   outline-offset: 4px;
 }
 
@@ -63,7 +63,7 @@ body {
   padding: 2rem; /* Improved spacing */
   background-color: var(--highlight-brown);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for a floating effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
 }
 
 .options {
@@ -89,7 +89,7 @@ body {
 }
 
 .options button:focus {
-  outline: 3px solid #007BFF; /* Optional outline for accessibility */
+  outline: 3px solid #007BFF; 
   outline-offset: 4px;
 }
 
