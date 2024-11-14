@@ -1,26 +1,40 @@
 :root {
-  --light-brown: #d2b48c;   /* backgrounds */
-  --medium-brown: #a67b5b;  /* buttons */
-  --dark-brown: #8b4513;    /* hover and accents */
-  --deep-brown: #5c3a1e;    /* text */
-  --highlight-brown: #f0e2c1; /* Highlight for correct answers */
-  --error-brown: #f5c6a5;    /* Lighter red-brown for incorrect answers */
+  --background-color: #f0f4f8a9;    /* Background color */
+  --button-color: #4c9f70;        /* Button color */
+  --hover-color: #387e56;         /* Hover and accent color */
+  --text-color: #1f2933;          /* Text color */
+  --highlight-color: #ffd166;     /* Highlight color */
+  --error-color: #ef476f;         /* Highlight color */
 }
 
+
 body {
-  font-family: 'Lucida Handwriting', cursive; /* Update font later */
-  background-color: var(--light-brown); 
-  color: var(--deep-brown);
+  font-family: 'Arial', sans-serif; /* Update the font if desired */
+  background-color: var(--background-color); /* Set background color */
+  color: var(--text-color); /* Use text color */
 }
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh; /* Full height of the viewport */
   width: 100vw; /* Full width of the viewport */
-  box-sizing: border-box; 
-  padding: 1rem; /* Padding */
+  box-sizing: border-box; /* Ensures padding is included in width and height calculations */
+  padding: 1rem; /* Padding to prevent content from touching screen edges */
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem; /* Adds some space below the logo */
+}
+
+.logo {
+  max-width: 150px; /* Adjust the size of your logo */
+  height: auto;     /* Keep aspect ratio */
 }
 
 .subject-selection {
@@ -39,18 +53,18 @@ body {
   font-size: 1.5rem;
   border: none;
   cursor: pointer;
-  background-color: var(--medium-brown);
-  color: white;
+  background-color: var(--button-color);
+  color: var(--text-color);
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .subject-grid button:hover {
-  background-color: var(--dark-brown);
+  background-color: var(--hover-color);
 }
 
 .subject-grid button:focus {
-  outline: 3px solid #007BFF; /* Hit tab to navigate with keyboard!! */
+  outline: 3px solid #007BFF; /* Optional outline for accessibility */
   outline-offset: 4px;
 }
 
@@ -61,9 +75,9 @@ body {
 .quiz {
   text-align: center;
   padding: 2rem; /* Improved spacing */
-  background-color: var(--highlight-brown);
+  background-color: var(--highlight-color);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for a floating effect */
 }
 
 .options {
@@ -78,18 +92,18 @@ body {
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
-  background-color: var(--medium-brown);
-  color: white;
+  background-color: var(--button-color);
+  color: var(--text-color);
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .options button:hover {
-  background-color: var(--dark-brown);
+  background-color: var(--hover-color);
 }
 
 .options button:focus {
-  outline: 3px solid #007BFF; 
+  outline: 3px solid #007BFF; /* Optional outline for accessibility */
   outline-offset: 4px;
 }
 
@@ -106,13 +120,13 @@ body {
 }
 
 .feedback.correct {
-  color: green;
-  background-color: var(--highlight-brown);
+  color: var(--hover-color);
+  background-color: var(--highlight-color);
 }
 
 .feedback.wrong {
-  color: red;
-  background-color: var(--error-brown);
+  color: var(--text-color);
+  background-color: var(--error-color);
 }
 
 @keyframes fadeIn {
