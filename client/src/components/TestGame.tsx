@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './cits-logo.png';
+import logo from '../assets/cits-logo.png';
 
 export const TestGame = () => {
   // Set the selectedSubject type to be a key of subjects
