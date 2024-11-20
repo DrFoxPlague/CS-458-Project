@@ -22,8 +22,6 @@ passport.use(
                         id: profile.id,
                         name: profile.displayName,
                         email: profile.emails?.[0].value,
-                        grade: "",
-                        dob: null,
                         bdg_coll: [],
                         is_staff: false
                     });

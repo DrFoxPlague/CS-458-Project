@@ -4,7 +4,8 @@ const GameSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     game_name: {
         type: String,

@@ -4,7 +4,8 @@ const ExhibitSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     ex_name: {
         type: String,
