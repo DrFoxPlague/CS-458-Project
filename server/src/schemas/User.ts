@@ -4,7 +4,8 @@ const UserSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     name: {
         type: String,
@@ -17,10 +18,12 @@ const UserSchema = new Schema({
     grade: {
         type: String,
         required: true,
+        default: "N/A"
     },
     dob: {
         type: Date,
         required: true,
+        default: new Date('2024-01-15')
     },
     bdg_coll: {
         type: Array,

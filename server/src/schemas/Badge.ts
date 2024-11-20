@@ -4,7 +4,8 @@ const BadgeSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     bdg_name: {
         type: String,
