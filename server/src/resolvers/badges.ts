@@ -81,7 +81,7 @@ export default {
                     });
                 }
 
-                const badge = await BadgeModel.findById(id);
+                const badge = await BadgeModel.findOne({ id });
 
                 if (!badge) {
                     throw new GraphQLError("Badge not found!", {
@@ -127,7 +127,7 @@ export default {
                     });
                 }
 
-                const badge = await BadgeModel.findById(id);
+                const badge = await BadgeModel.findOne({ id });
 
                 if (!badge) {
                     throw new GraphQLError("Badge not found!", {

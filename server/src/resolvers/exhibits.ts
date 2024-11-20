@@ -107,7 +107,7 @@ export default {
                     });
                 }
 
-                const exhibit = await ExhibitModel.findById(id);
+                const exhibit = await ExhibitModel.findOne({ id });
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {
@@ -159,7 +159,7 @@ export default {
                     });
                 }
 
-                const exhibit = await ExhibitModel.findById(id);
+                const exhibit = await ExhibitModel.findOne({ id });
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {

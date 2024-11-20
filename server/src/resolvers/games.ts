@@ -105,7 +105,7 @@ export default {
                     });
                 }
 
-                const game = await GameModel.findById(id);
+                const game = await GameModel.findOne({ id });
 
                 if (!game) {
                     throw new GraphQLError("Game not found!", {
@@ -151,7 +151,7 @@ export default {
                     });
                 }
 
-                const game = await GameModel.findById(id);
+                const game = await GameModel.findOne({ id });
 
                 if (!game) {
                     throw new GraphQLError("Game not found!", {
@@ -229,7 +229,7 @@ export default {
                     });
                 }
 
-                const triviaQuestion = await TriviaQuestionModel.findById(id);
+                const triviaQuestion = await TriviaQuestionModel.findOne({ id });
 
                 if (!triviaQuestion) {
                     throw new GraphQLError("Trivia question not found!", {
@@ -276,7 +276,7 @@ export default {
                     });
                 }
 
-                const triviaQuestion = await TriviaQuestionModel.findById(id);
+                const triviaQuestion = await TriviaQuestionModel.findOne({ id });
 
                 if (!triviaQuestion) {
                     throw new GraphQLError("Trivia question not found!", {

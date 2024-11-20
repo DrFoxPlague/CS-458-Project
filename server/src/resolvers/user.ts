@@ -49,7 +49,7 @@ export default {
                     });
                 }
 
-                const user = await UserModel.findById(id);
+                const user = await UserModel.findOne({ id });
 
                 if (!user) {
                     throw new GraphQLError("User not found!", {
@@ -87,7 +87,7 @@ export default {
             { id }: { id: string }
         ) => {
             try {
-                const user = await UserModel.findById(id);
+                const user = await UserModel.findOne({ id });
 
                 if (!user) {
                     throw new GraphQLError("User not found!", {
