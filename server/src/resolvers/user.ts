@@ -32,11 +32,13 @@ export default {
     Mutation: {
         createUser: async (
             _: any,
-            { _id, input }: { _id: string, input: UserInput },
-            context: { auth: boolean }
+            { input }: { input: UserInput },
+            context: { req: any }
         ) => {
             try {
-                if(!context.auth) {
+                const userID = context.req?.user?._id;
+
+                if(!userID) {
                     throw new GraphQLError("Not authenticated with Google!", {
                         extensions: {
                             errors: [
@@ -49,7 +51,7 @@ export default {
                     });
                 }
 
-                const user = await UserModel.findOne({ _id });
+                const user = await UserModel.findById( userID );
 
                 if (!user) {
                     throw new GraphQLError("User not found!", {

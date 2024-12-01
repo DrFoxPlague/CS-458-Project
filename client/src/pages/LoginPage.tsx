@@ -64,7 +64,10 @@ export const FollowUpPage = () => {
         try {
             await createUser({
                 variables: {
-                    input: signUpData
+                    input: {
+                        grade: signUpData.grade,
+                        dob: signUpData.dob
+                    }
                 }
             });
             

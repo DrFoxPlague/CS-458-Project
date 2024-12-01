@@ -14,7 +14,7 @@ passport.use(
         async (accessToken, refreshToken, profile, done) => {
             try {
                 // find user
-                let user = await UserModel.findOne({ _id: profile.id });
+                let user = await UserModel.findById({ _id: profile.id });
 
                 // if they don't exist, create one
                 if (!user) {
@@ -34,12 +34,6 @@ passport.use(
             } catch (err) {
                 throw err;
             }
-            
-            /*const user = {
-                googleId: profile.id,
-                displayName: profile.displayName,
-                email: profile.emails?.[0].value,
-            };*/
         }
     )
 );

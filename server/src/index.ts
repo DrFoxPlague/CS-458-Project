@@ -40,7 +40,12 @@ app.use(
         secret: process.env.SESSION_SECRET || "defaultsecret",
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: false }, // Set `secure: true` in production with HTTPS
+        cookie: { 
+            secure: process.env.NODE_ENV === "production",
+            httpOnly: true,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            maxAge: 1000 * 60 * 60 * 24,
+         }, // Set `secure: true` in production with HTTPS
     }),
     passport.initialize(),
     passport.session()
@@ -53,7 +58,10 @@ app.get("/auth/google/callback", googleCallback);
 // Set up middleware and GQL
 app.use(
     '/graphql',
-    cors(),
+    cors({
+        origin: "http://localhost:5173", 
+        credentials: true
+    }),
     express.json(),
     expressMiddleware(server, {
         context: async ({ req }: ExpressContextFunctionArgument) => {
