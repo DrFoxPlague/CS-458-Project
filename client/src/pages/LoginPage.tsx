@@ -54,7 +54,7 @@ export const FollowUpPage = () => {
         grade: "",
     });
 
-    const [createUser, { loading }] = useMutation(CreateOrUpdateUser);
+    const [createOrUpdateUser, { loading }] = useMutation(CreateOrUpdateUser);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -62,7 +62,7 @@ export const FollowUpPage = () => {
         if (!signUpData.dob || !signUpData.grade) return toast.error("Please fill out ALL fields!");
 
         try {
-            await createUser({
+            await createOrUpdateUser({
                 variables: {
                     input: {
                         grade: signUpData.grade,

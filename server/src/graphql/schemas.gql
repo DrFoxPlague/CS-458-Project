@@ -110,7 +110,7 @@ type Query {
 
 type Mutation {
     # User Mutations
-    createUser(input: UserInput): User!
+    createOrUpdateUser(input: UserInput): User!
 
     deleteUser(id: ID!): User!
 

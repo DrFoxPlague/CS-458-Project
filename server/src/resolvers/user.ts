@@ -30,7 +30,7 @@ export default {
         getUsers: async () => (await UserModel.find()).toSorted()
     },
     Mutation: {
-        createUser: async (
+        createOrUpdateUser: async (
             _: any,
             { input }: { input: UserInput },
             context: { req: any }
@@ -76,12 +76,6 @@ export default {
             } catch (err) {
                 throw err;
             }
-        },
-
-        updateUser: async (
-            _: any
-        ) => {
-            console.log("updateUser still a WIP!")
         },
 
         deleteUser: async (
