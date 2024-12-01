@@ -1,7 +1,7 @@
 import { model, Schema, type InferSchemaType } from "mongoose";
 
 const GameSchema = new Schema({
-    id: {
+    _id: {
         type: String,
         required: true,
         unique: true,

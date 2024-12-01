@@ -1,7 +1,7 @@
 import { model, Schema, type InferSchemaType } from "mongoose";
 
 const TriviaQuestionSchema = new Schema({
-    id: {
+    _id: {
         type: String,
         required: true,
         unique: true,

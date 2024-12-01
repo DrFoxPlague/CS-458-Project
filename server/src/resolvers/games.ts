@@ -16,10 +16,10 @@ type QuestionInput = {
 
 export default {
     Query: {
-        getGame: async (_: any, { id }: { id: string }) => {
+        getGame: async (_: any, { _id }: { _id: string }) => {
             try {
                 // fetch game object
-                const game = await GameModel.findOne({ id });
+                const game = await GameModel.findOne({ _id });
 
                 if (!game) {
                     throw new GraphQLError("Game not found!", {
@@ -71,7 +71,7 @@ export default {
                 }
 
                 const game = new GameModel({
-                    id: GenID.game(),
+                    _id: GenID.game(),
                     game_name: input.game_name,
                     game_subject: input.game_subject,
                     questions: []
@@ -88,7 +88,7 @@ export default {
 
         updateGame: async (
             _: any,
-            { id, input }: { id: string, input: Partial<GameDataInput> },
+            { _id, input }: { _id: string, input: Partial<GameDataInput> },
             context: { isStaff: boolean } 
         ) => {
             try {
@@ -105,7 +105,7 @@ export default {
                     });
                 }
 
-                const game = await GameModel.findOne({ id });
+                const game = await GameModel.findOne({ _id });
 
                 if (!game) {
                     throw new GraphQLError("Game not found!", {
@@ -134,7 +134,7 @@ export default {
 
         deleteGame: async (
             _: any,
-            { id }: { id: string },
+            { _id }: { _id: string },
             context: { isStaff: boolean } 
         ) => {
             try {
@@ -151,7 +151,7 @@ export default {
                     });
                 }
 
-                const game = await GameModel.findOne({ id });
+                const game = await GameModel.findOne({ _id });
 
                 if (!game) {
                     throw new GraphQLError("Game not found!", {
@@ -166,7 +166,7 @@ export default {
                     });
                 }
 
-                await GameModel.findByIdAndDelete(id);
+                await GameModel.findByIdAndDelete(_id);
 
                 return game;
 
@@ -195,7 +195,7 @@ export default {
                 }
 
                 const triviaQuestion = new TriviaQuestionModel({
-                    id: GenID.triviaQuestion(),
+                    _id: GenID.triviaQuestion(),
                     question: input.question,
                     choices: input.choices,
                     answer: input.answer
@@ -212,7 +212,7 @@ export default {
 
         updateTrivQues: async (
             _: any,
-            { id, input }: { id: string, input: QuestionInput },
+            { _id, input }: { _id: string, input: QuestionInput },
             context: { isStaff: boolean } 
         ) => {
             try {
@@ -229,7 +229,7 @@ export default {
                     });
                 }
 
-                const triviaQuestion = await TriviaQuestionModel.findOne({ id });
+                const triviaQuestion = await TriviaQuestionModel.findOne({ _id });
 
                 if (!triviaQuestion) {
                     throw new GraphQLError("Trivia question not found!", {
@@ -259,7 +259,7 @@ export default {
 
         deleteTrivQues: async (
             _: any,
-            { id }: { id: string },
+            { _id }: { _id: string },
             context: { isStaff: boolean } 
         ) => {
             try {
@@ -276,7 +276,7 @@ export default {
                     });
                 }
 
-                const triviaQuestion = await TriviaQuestionModel.findOne({ id });
+                const triviaQuestion = await TriviaQuestionModel.findOne({ _id });
 
                 if (!triviaQuestion) {
                     throw new GraphQLError("Trivia question not found!", {
@@ -291,7 +291,7 @@ export default {
                     });
                 }
 
-                await TriviaQuestionModel.findByIdAndDelete(id);
+                await TriviaQuestionModel.findByIdAndDelete(_id);
 
                 return triviaQuestion;
 

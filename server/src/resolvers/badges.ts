@@ -4,8 +4,8 @@ import GenID from "../util/GenID";
 
 export default {
     Query: {
-        getBadge: async (_: any, { id }: { id: string }) => {
-            const badge = await BadgeModel.findOne({ id });
+        getBadge: async (_: any, { _id }: { _id: string }) => {
+            const badge = await BadgeModel.findOne({ _id });
 
             if (!badge) {
                 throw new GraphQLError("Badge not found!", {
@@ -46,7 +46,7 @@ export default {
                 }
 
                 const badge = new BadgeModel({
-                    id: GenID.badge(),
+                    _id: GenID.badge(),
                     bdg_name,
                     bdg_type
                 });
@@ -62,8 +62,8 @@ export default {
 
         updateBadge: async (
             _: any,
-            { id, bdg_name, bdg_type }: 
-            { id: string, bdg_name?: string, bdg_type?: string },
+            { _id, bdg_name, bdg_type }: 
+            { _id: string, bdg_name?: string, bdg_type?: string },
             context: { isStaff: boolean } 
         ) => {
 
@@ -81,7 +81,7 @@ export default {
                     });
                 }
 
-                const badge = await BadgeModel.findOne({ id });
+                const badge = await BadgeModel.findOne({ _id });
 
                 if (!badge) {
                     throw new GraphQLError("Badge not found!", {
@@ -110,7 +110,7 @@ export default {
 
         deleteBadge: async (
             _: any,
-            { id }: { id: string },
+            { _id }: { _id: string },
             context: { isStaff: boolean } 
         ) => {
             try {
@@ -127,7 +127,7 @@ export default {
                     });
                 }
 
-                const badge = await BadgeModel.findOne({ id });
+                const badge = await BadgeModel.findOne({ _id });
 
                 if (!badge) {
                     throw new GraphQLError("Badge not found!", {
@@ -142,7 +142,7 @@ export default {
                     });
                 }
 
-                await BadgeModel.findByIdAndDelete(id);
+                await BadgeModel.findByIdAndDelete(_id);
 
                 return badge;
 

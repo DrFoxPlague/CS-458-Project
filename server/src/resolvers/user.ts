@@ -8,8 +8,8 @@ type UserInput = {
 
 export default {
     Query: {
-        getUser: async (_: any, { id }: { id: string }) => {
-            const user = await UserModel.findOne({ id });
+        getUser: async (_: any, { _id }: { _id: string }) => {
+            const user = await UserModel.findOne({ _id });
 
             if (!user) {
                 throw new GraphQLError("User not found!", {
@@ -32,7 +32,7 @@ export default {
     Mutation: {
         createUser: async (
             _: any,
-            { id, input }: { id: string, input: UserInput },
+            { _id, input }: { _id: string, input: UserInput },
             context: { auth: boolean }
         ) => {
             try {
@@ -49,7 +49,7 @@ export default {
                     });
                 }
 
-                const user = await UserModel.findOne({ id });
+                const user = await UserModel.findOne({ _id });
 
                 if (!user) {
                     throw new GraphQLError("User not found!", {
@@ -84,10 +84,10 @@ export default {
 
         deleteUser: async (
             _: any,
-            { id }: { id: string }
+            { _id }: { _id: string }
         ) => {
             try {
-                const user = await UserModel.findOne({ id });
+                const user = await UserModel.findOne({ _id });
 
                 if (!user) {
                     throw new GraphQLError("User not found!", {
@@ -102,7 +102,7 @@ export default {
                     });
                 }
 
-                await UserModel.findByIdAndDelete(id);
+                await UserModel.findByIdAndDelete(_id);
 
                 return user;
             } catch (err) {

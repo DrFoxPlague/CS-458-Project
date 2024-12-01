@@ -1,7 +1,7 @@
 import { model, Schema, type InferSchemaType } from "mongoose";
 
 const BadgeSchema = new Schema({
-    id: {
+    _id: {
         type: String,
         required: true,
         unique: true,

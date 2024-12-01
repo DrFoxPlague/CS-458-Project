@@ -4,8 +4,8 @@ import GenID from "../util/GenID";
 
 export default {
     Query: {
-        getExhibit: async (_: any, { id }: { id: string }) => {
-            const exhibit = await ExhibitModel.findOne({ id });
+        getExhibit: async (_: any, { _id }: { _id: string }) => {
+            const exhibit = await ExhibitModel.findOne({ _id });
 
             if (!exhibit) {
                 throw new GraphQLError("Exhibit not found!", {
@@ -67,7 +67,7 @@ export default {
                 }
 
                 const exhibit = new ExhibitModel({
-                    id: GenID.exhibit(),
+                    _id: GenID.exhibit(),
                     ex_name,
                     content: {
                         title,
@@ -88,8 +88,8 @@ export default {
         
         updateExhibit: async (
             _: any,
-            { id, ex_name, content }:
-            { id: string, ex_name?: string, content?: 
+            { _id, ex_name, content }:
+            { _id: string, ex_name?: string, content?: 
                 {title?: string, body?: string, media?: any}},
             context: { isStaff: boolean }    
         ) => {
@@ -107,7 +107,7 @@ export default {
                     });
                 }
 
-                const exhibit = await ExhibitModel.findOne({ id });
+                const exhibit = await ExhibitModel.findOne({ _id });
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {
@@ -142,7 +142,7 @@ export default {
 
         deleteExhibit: async (
             _: any,
-            { id }: { id: string },
+            { _id }: { _id: string },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -159,7 +159,7 @@ export default {
                     });
                 }
 
-                const exhibit = await ExhibitModel.findOne({ id });
+                const exhibit = await ExhibitModel.findOne({ _id });
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {
@@ -174,7 +174,7 @@ export default {
                     });
                 }
 
-                await ExhibitModel.findByIdAndDelete({ id });
+                await ExhibitModel.findByIdAndDelete({ _id });
 
                 return exhibit;
 

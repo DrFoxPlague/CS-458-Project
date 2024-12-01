@@ -14,12 +14,12 @@ passport.use(
         async (accessToken, refreshToken, profile, done) => {
             try {
                 // find user
-                let user = await UserModel.findOne({ id: profile.id });
+                let user = await UserModel.findOne({ _id: profile.id });
 
                 // if they don't exist, create one
                 if (!user) {
                     user = new UserModel({
-                        id: profile.id,
+                        _id: profile.id,
                         name: profile.displayName,
                         email: profile.emails?.[0].value,
                         bdg_coll: [],
@@ -48,18 +48,18 @@ passport.use(
 passport.serializeUser((user: any, done) => {
     // on new session, store some information in the session 
     // we probably only want to store user.id to keep it lightweight and not store things like passwords in the session
-    done(null, user.id);
+    done(null, user._id);
 });
 
 // Deserialize user from session
-passport.deserializeUser(async (id: string, done) => {
+passport.deserializeUser(async (_id: string, done) => {
     // this function is used to get the full user details from the database using the details stored in the session
     // this function might need to be async / have an async database call
 
     // use an incoming user id to fetch relevant information and build a user object to return
 
     try {
-        const user = await UserModel.findById(id);
+        const user = await UserModel.findById(_id);
 
         if (!user) {
             return done(new Error("User not found!"));
