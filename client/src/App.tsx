@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import { ErrorPage } from './pages/ErrorPage';
 import { ExhibitLayout } from './exhibits/ExhibitLayout';
 import { LoginPage, FollowUpPage } from './pages/LoginPage';
+import { HomePage } from './home/HomePage';
 import { Toaster } from 'react-hot-toast';
 
 const client = new ApolloClient({
@@ -36,6 +37,7 @@ const App = () => (
                 <Route path="/exhibit" element={<ExhibitLayout />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/signup" element={<FollowUpPage />}/>
+                <Route path="/home" element={<HomePage />} />
             </Routes>
         </Router>
     </ApolloProvider>
