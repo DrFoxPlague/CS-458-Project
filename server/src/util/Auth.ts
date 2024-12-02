@@ -77,7 +77,7 @@ passport.deserializeUser(async (_id: string, done) => {
 // Middleware to check if a user is authenticated
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) return next();
-    res.redirect("/login");
+    res.status(401).json({ error: "Unauthorized. Please log in." });
 };
 
 // Export route handlers for Google authentication

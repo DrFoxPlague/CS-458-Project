@@ -54,6 +54,9 @@ app.use(
 // Authentication routes
 app.get("/auth/google", googleAuth);
 app.get("/auth/google/callback", googleCallback);
+app.get("/auth/me", isAuthenticated, async (req, res) => {
+    res.json(req.user);
+});
 
 // Set up middleware and GQL
 app.use(
