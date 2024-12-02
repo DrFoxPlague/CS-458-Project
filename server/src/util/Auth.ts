@@ -23,9 +23,16 @@ passport.use(
                         name: profile.displayName,
                         email: profile.emails?.[0].value,
                         bdg_coll: [],
-                        is_staff: false
+                        is_staff: false,
+                        prof_pic: profile.photos?.[0]?.value || ""
                     });
 
+                    await user.save();
+                }
+
+                // check if user has changed profile picture
+                if (user.prof_pic !== profile.photos?.[0]?.value) {
+                    user.prof_pic = profile.photos?.[0]?.value || "";
                     await user.save();
                 }
 
@@ -76,6 +83,6 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 // Export route handlers for Google authentication
 export const googleAuth = passport.authenticate("google", { scope: ["profile", "email"] });
 export const googleCallback = passport.authenticate("google", {
-    successRedirect: "/graphql",
-    failureRedirect: "/login",
+    successRedirect: "http://localhost:5173/home", // Redirect to the frontend
+    failureRedirect: "http://localhost:5173/login", // Redirect to the frontend login page
 });

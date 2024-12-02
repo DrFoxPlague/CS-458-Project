@@ -36,6 +36,7 @@ type User {
     dob: Date!
     bdg_coll: [Badge]!
     is_staff: Boolean!
+    prof_pic: String!
 }
 
 #type Staff {

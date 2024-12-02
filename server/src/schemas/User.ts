@@ -33,6 +33,10 @@ const UserSchema = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    prof_pic: {
+        type: String,
+        required: true,
     }
 })
 
