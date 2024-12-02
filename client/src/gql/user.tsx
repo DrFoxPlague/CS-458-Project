@@ -33,6 +33,7 @@ export const GetUser = gql`
                 bdg_type
             }
             is_staff
+            prof_pic
         }
     }
 `;
@@ -51,6 +52,7 @@ export const GetUsers = gql`
                 bdg_type
             }
             is_staff
+            prof_pic
         }
     }
 `;
