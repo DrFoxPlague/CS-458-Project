@@ -17,7 +17,11 @@ export const CreateExhibit = gql`
 `;
 
 export const UpdateExhibit = gql`
-    mutation UpdateExhibit($id: ID!, $ex_name: String, $content: ExhibitContentInput) {
+    mutation UpdateExhibit(
+        $id: String!
+        $ex_name: String
+        $content: ExhibitContentInput
+    ) {
         updateExhibit(id: $id, ex_name: $ex_name, content: $content) {
             id
             ex_name
@@ -33,7 +37,7 @@ export const UpdateExhibit = gql`
 `;
 
 export const DeleteExhibit = gql`
-    mutation DeleteExhibit($id: ID!) {
+    mutation DeleteExhibit($id: String!) {
         deleteExhibit(id: $id) {
             id
             ex_name
@@ -49,7 +53,7 @@ export const DeleteExhibit = gql`
 `;
 
 export const GetExhibit = gql`
-    query GetExhibit($id: ID!) {
+    query GetExhibit($id: String!) {
         getExhibit(id: $id) {
             id
             ex_name

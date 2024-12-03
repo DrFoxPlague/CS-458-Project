@@ -14,7 +14,7 @@ export const CreateGame = gql`
 `;
 
 export const DeleteGame = gql`
-    mutation DeleteGame($id: ID!) {
+    mutation DeleteGame($id: String!) {
         deleteGame(id: $id) {
             id
             game_name
@@ -24,7 +24,7 @@ export const DeleteGame = gql`
 `;
 
 export const UpdateGame = gql`
-    mutation UpdateGame($id: ID!, $input: GameDataInput!) {
+    mutation UpdateGame($id: String!, $input: GameDataInput!) {
         updateGame(id: $id, input: $input) {
             id
             game_name
@@ -48,7 +48,7 @@ export const CreateTrivQues = gql`
 `;
 
 export const DeleteTrivQues = gql`
-    mutation DeleteTrivQues($id: ID!) {
+    mutation DeleteTrivQues($id: String!) {
         deleteTrivQues(id: $id) {
             id
             question
@@ -59,7 +59,7 @@ export const DeleteTrivQues = gql`
 `;
 
 export const UpdateTrivQues = gql`
-    mutation UpdateTrivQues($id: ID!, $input: QuestionInput) {
+    mutation UpdateTrivQues($id: String!, $input: QuestionInput) {
         updateTrivQues(id: $id, input: $input) {
             id
             question
@@ -70,7 +70,7 @@ export const UpdateTrivQues = gql`
 `;
 
 export const AddQuestionToGame = gql`
-    mutation AddQuestionToGame($gameId: ID!, $question: ID!) {
+    mutation AddQuestionToGame($gameId: String!, $question: String!) {
         addQuestion(gameId: $gameId, question: $question) {
             id
             game_name
@@ -83,7 +83,7 @@ export const AddQuestionToGame = gql`
 `;
 
 export const RemoveQuestionFromGame = gql`
-    mutation RemoveQuestionFromGame($gameId: ID!, $question: ID!) {
+    mutation RemoveQuestionFromGame($gameId: String!, $question: String!) {
         removeQuestion(gameId: $gameId, question: $question) {
             id
             game_name
@@ -96,7 +96,7 @@ export const RemoveQuestionFromGame = gql`
 `;
 
 export const GetGame = gql`
-    query GetGame($id: ID!) {
+    query GetGame($id: String!) {
         getGame(id: $id) {
             id
             game_name

@@ -11,7 +11,7 @@ export const CreateBadge = gql`
 `;
 
 export const DeleteBadge = gql`
-    mutation DeleteBadge($id: ID!) {
+    mutation DeleteBadge($id: String!) {
         deleteBadge(id: $id) {
             id
             bdg_name
@@ -21,7 +21,7 @@ export const DeleteBadge = gql`
 `;
 
 export const UpdateBadge = gql`
-    mutation UpdateBadge($id: ID!, $bdg_name: String, $bdg_type: String) {
+    mutation UpdateBadge($id: String!, $bdg_name: String, $bdg_type: String) {
         updateBadge(id: $id, bdg_name: $bdg_name, bdg_type: $bdg_type) {
             id
             bdg_name
@@ -31,7 +31,7 @@ export const UpdateBadge = gql`
 `;
 
 export const GetBadge = gql`
-    query GetBadge($id: ID!) {
+    query GetBadge($id: String!) {
         getBadge(id: $id) {
             id
             bdg_name

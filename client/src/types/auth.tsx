@@ -9,7 +9,12 @@ export type User = {
     prof_pic: string;
 }
 
+export type UserWithToken = User & {
+    token: string;
+};
+
 export type AuthState = {
     user: User | null;
-    setUser: () => Promise<void>;
+    isLoggedIn: boolean;
+    setUser: (user: User) => void;
 }

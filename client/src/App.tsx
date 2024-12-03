@@ -1,46 +1,71 @@
 //peter
-import './css/App.css';
-import { TestGame } from './components/TestGame';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
-import { ErrorPage } from './pages/ErrorPage';
-import { ExhibitLayout } from './exhibits/ExhibitLayout';
-import { LoginPage, FollowUpPage } from './pages/LoginPage';
-import { HomePage } from './home/HomePage';
-import { Toaster } from 'react-hot-toast';
+import "./css/App.css";
+import { TestGame } from "./pages/TestGame";
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    ApolloLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import createHttpLink from "apollo-upload-client/createUploadLink.mjs";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ErrorPage } from "./pages/ErrorPage";
+import { ExhibitLayout } from "./exhibits/ExhibitLayout";
+import { LoginPage, FollowUpPage } from "./pages/LoginPage";
+import { Toaster } from "react-hot-toast";
 
-const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',  // Your GraphQL server URL
-    cache: new InMemoryCache(),
-    credentials: 'include', // Allows cookies for auth if using sessions
+const httpLink = createHttpLink({
+    uri: "http://localhost:4000/graphql",
 });
 
+const authLink = setContext((_, { headers }) => {
+    // Get the authentication token from local storage if it exists
+    const token = localStorage.getItem("token");
+    // Return the headers to the context so httpLink can read them
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : "",
+        },
+    };
+});
 
-const App = () => (
-    <ApolloProvider client={client}>
-        <Toaster 
-            position="bottom-center"
-            toastOptions={{
-            // Define default options
-                className: '',
-                duration: 5000,
-                style: {
-                    background: '#363636',
-                    color: '#fff',
-                }
-            }}
-        />
-        <Router>
-            <Routes>
-                <Route path="*" element={<ErrorPage />}/>
-                <Route path="/" element={<TestGame />}/>
-                <Route path="/exhibit" element={<ExhibitLayout />}/>
-                <Route path="/login" element={<LoginPage />}/>
-                <Route path="/signup" element={<FollowUpPage />}/>
-                <Route path="/home" element={<HomePage />} />
-            </Routes>
-        </Router>
-    </ApolloProvider>
-)
+const link = ApolloLink.from([authLink, httpLink]);
+
+const client = new ApolloClient({
+    link,
+    cache: new InMemoryCache(),
+    credentials: "include", // Allows cookies for auth if using sessions
+});
+
+const App = () => {
+    return (
+        <ApolloProvider client={client}>
+            <Toaster
+                position="bottom-center"
+                toastOptions={{
+                    // Define default options
+                    className: "",
+                    duration: 5000,
+                    style: {
+                        background: "#363636",
+                        color: "#fff",
+                    },
+                }}
+            />
+            <Router>
+                <Routes>
+                    <Route path="/" element={<TestGame />} />
+                    <Route path="/exhibit" element={<ExhibitLayout />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<FollowUpPage />} />
+                    <Route path="*" element={<ErrorPage />} />
+                    {/* <Route path="/home" element={<HomePage />} /> */}
+                </Routes>
+            </Router>
+        </ApolloProvider>
+    );
+};
 
 export default App;
