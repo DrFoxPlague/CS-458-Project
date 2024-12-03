@@ -8,19 +8,15 @@ const BadgeSchema = new Schema(
             unique: true,
             index: true,
         },
-        bdg_name: {
+        name: {
             type: String,
             required: true,
         },
-        bdg_desc: {
+        description: {
             type: String,
             required: true,
         },
-        bdg_img: {
-            type: String,
-            required: true,
-        },
-        bdg_type: {
+        type: {
             type: String,
             required: true,
         },

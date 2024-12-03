@@ -29,7 +29,7 @@ export default {
     Mutation: {
         createBadge: async (
             _: any,
-            { bdg_name, bdg_type }: { bdg_name: string; bdg_type: string },
+            { name, description, type }: { name: string; description: string; type: string },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -48,8 +48,9 @@ export default {
 
                 const badge = new BadgeModel({
                     _id: GenID.badge(),
-                    bdg_name,
-                    bdg_type,
+                    name,
+                    description,
+                    type
                 });
 
                 await badge.save();
@@ -64,9 +65,10 @@ export default {
             _: any,
             {
                 id,
-                bdg_name,
-                bdg_type,
-            }: { id: string; bdg_name?: string; bdg_type?: string },
+                name,
+                description,
+                type,
+            }: { id: string; name?: string; description?: string; type?: string },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -100,8 +102,9 @@ export default {
                     });
                 }
 
-                if (bdg_name) badge.bdg_name = bdg_name;
-                if (bdg_type) badge.bdg_type = bdg_type;
+                if (name) badge.name = name;
+                if (description) badge.description = description;
+                if (type) badge.type = type;
 
                 await badge.save();
 

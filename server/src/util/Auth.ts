@@ -26,17 +26,17 @@ passport.use(
                         _id: profile.id,
                         name: profile.displayName,
                         email: profile.emails?.[0].value,
-                        bdg_coll: [],
-                        is_staff: false,
-                        prof_pic: profile.photos?.[0]?.value || "",
+                        badges: [],
+                        staff: false,
+                        profilePicture: profile.photos?.[0]?.value || "",
                     });
 
                     await user.save();
                 }
 
                 // check if user has changed profile picture
-                if (user.prof_pic !== profile.photos?.[0]?.value) {
-                    user.prof_pic = profile.photos?.[0]?.value || "";
+                if (user.profilePicture !== profile.photos?.[0]?.value) {
+                    user.profilePicture = profile.photos?.[0]?.value || "";
 
                     await user.save();
                 }
@@ -171,7 +171,7 @@ export const authUser = async (code: any) => {
                 email: userInfo.emailAddresses?.[0].value,
                 bdg_coll: [],
                 is_staff: false,
-                prof_pic: userInfo.photos?.[0]?.url || "",
+                profilePicture: userInfo.photos?.[0]?.url || "",
             });
 
             await user.save();

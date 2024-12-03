@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const CreateExhibit = gql`
-    mutation CreateExhibit($ex_name: String!, $content: ExhibitContentInput!) {
-        createExhibit(ex_name: $ex_name, content: $content) {
+    mutation CreateExhibit($name: String!, $content: ExhibitContentInput!) {
+        createExhibit(name: $name, content: $content) {
             id
-            ex_name
+            name
             content {
                 title
                 body
@@ -19,12 +19,12 @@ export const CreateExhibit = gql`
 export const UpdateExhibit = gql`
     mutation UpdateExhibit(
         $id: String!
-        $ex_name: String
+        $name: String
         $content: ExhibitContentInput
     ) {
-        updateExhibit(id: $id, ex_name: $ex_name, content: $content) {
+        updateExhibit(id: $id, name: $name, content: $content) {
             id
-            ex_name
+            name
             content {
                 title
                 body
@@ -40,7 +40,7 @@ export const DeleteExhibit = gql`
     mutation DeleteExhibit($id: String!) {
         deleteExhibit(id: $id) {
             id
-            ex_name
+            name
             content {
                 title
                 body
@@ -56,7 +56,7 @@ export const GetExhibit = gql`
     query GetExhibit($id: String!) {
         getExhibit(id: $id) {
             id
-            ex_name
+            name
             content {
                 title
                 body
@@ -72,7 +72,7 @@ export const GetExhibits = gql`
     query GetExhibits {
         getExhibits {
             id
-            ex_name
+            name
             content {
                 title
                 body

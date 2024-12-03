@@ -4,8 +4,8 @@ import { GraphQLError } from "graphql";
 import GenID from "../util/GenID";
 
 type GameDataInput = {
-    game_name: string;
-    game_subject: string;
+    name: string;
+    subject: string;
 };
 
 type QuestionInput = {
@@ -74,8 +74,8 @@ export default {
 
                 const game = new GameModel({
                     _id: GenID.game(),
-                    game_name: input.game_name,
-                    game_subject: input.game_subject,
+                    name: input.name,
+                    subject: input.subject,
                     questions: [],
                 });
 
@@ -122,8 +122,8 @@ export default {
                     });
                 }
 
-                if (input.game_name) game.game_name = input.game_name;
-                if (input.game_subject) game.game_subject = input.game_subject;
+                if (input.name) game.name = input.name;
+                if (input.subject) game.subject = input.subject;
 
                 await game.save();
 

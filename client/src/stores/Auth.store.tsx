@@ -8,6 +8,7 @@ type State = {
 
 type Action = {
     setUser: (user: User) => void;
+    logout: () => void;
 };
 
 export const useAuthStore = create<State & Action>()(
@@ -15,6 +16,7 @@ export const useAuthStore = create<State & Action>()(
         (set) => ({
             user: null,
             setUser: (user: User) => set({ user }),
+            logout: () => set({ user: null }),
         }),
         { name: "auth" }
     )

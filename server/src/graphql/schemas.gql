@@ -16,8 +16,8 @@ input QuestionInput {
 }
 
 input GameDataInput {
-    game_name: String
-    game_subject: String
+    name: String
+    subject: String
 }
 
 input UserInput {
@@ -34,9 +34,9 @@ type User {
     email: String!
     grade: String
     dob: Date
-    bdg_coll: [Badge]!
-    is_staff: Boolean!
-    prof_pic: String!
+    badges: [Badge]!
+    isStaff: Boolean!
+    profilePicture: String!
 }
 
 #type Staff {
@@ -49,8 +49,11 @@ type User {
 # Badge Schemas
 type Badge {
     id: String!
-    bdg_name: String!
-    bdg_type: String!
+     name: String!
+     description: String!
+     image: String!
+     category: String!
+    type: String!
 }
 
 # Exhibit Schemas
@@ -64,16 +67,16 @@ type ExhibitContent {
 
 type Exhibit {
     id: String!
-    ex_name: String!
+    name: String!
     content: ExhibitContent!
-    game: Game
+    game: Game!
 }
 
 # Game Schemas - NEEDS TO BE EXPANDED!!!
 type Game {
     id: String!
-    game_name: String!
-    game_subject: String!
+    name: String!
+    subject: String!
     questions: [Question]!
 }
 
@@ -141,14 +144,14 @@ type Mutation {
     #): Staff!
 
     # Badge Mutations
-    createBadge(bdg_name: String!, bdg_type: String!): Badge!
+    createBadge(name: String!, description: String!,  type: String!): Badge!
 
     deleteBadge(id: String!): Badge!
 
-    updateBadge(id: String!, bdg_name: String, bdg_type: String): Badge!
+    updateBadge(id: String!, name: String, description: String, type: String): Badge!
 
     # Exhibit Mutations
-    createExhibit(ex_name: String!, content: ExhibitContentInput!): Exhibit!
+    createExhibit(name: String!, content: ExhibitContentInput!): Exhibit!
 
     deleteExhibit(id: String!): Exhibit!
 

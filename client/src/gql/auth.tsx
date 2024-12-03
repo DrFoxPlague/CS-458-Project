@@ -15,13 +15,14 @@ export const LoginUser = gql`
             email
             grade
             dob
-            bdg_coll {
+            badges {
                 id
-                bdg_name
-                bdg_type
+                name
+                description
+                type
             }
-            is_staff
-            prof_pic
+            isStaff
+            profilePicture
         }
     }
 `;

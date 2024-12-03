@@ -83,7 +83,7 @@ app.use(
             const user = await checkToken(req);
 
             return {
-                isStaff: user.is_staff || false,
+                isStaff: user.staff || false,
                 authenticated: !!user,
                 user: user || null,
                 req,

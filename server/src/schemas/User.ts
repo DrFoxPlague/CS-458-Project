@@ -24,15 +24,15 @@ const UserSchema = new Schema(
             type: Date,
             default: null,
         },
-        bdg_coll: {
+        badges: {
             type: [String],
             default: [],
         },
-        is_staff: {
+        staff: {
             type: Boolean,
             default: false,
         },
-        prof_pic: {
+        profilePicture: {
             type: String,
             required: true,
         },

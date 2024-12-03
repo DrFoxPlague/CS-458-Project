@@ -57,12 +57,12 @@ const App = () => {
             />
             <Router>
                 <Routes>
-                    <Route path="/" element={<TestGame />} />
+                    <Route path="/" element={<HomePage />} />           
+                    <Route path="/test" element={<TestGame />} />
                     <Route path="/exhibit" element={<ExhibitLayout />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<FollowUpPage />} />
                     <Route path="*" element={<ErrorPage />} />
-                    <Route path="/home" element={<HomePage />} />
                 </Routes>
             </Router>
         </ApolloProvider>

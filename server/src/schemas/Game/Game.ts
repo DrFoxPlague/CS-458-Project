@@ -8,11 +8,11 @@ const GameSchema = new Schema(
             unique: true,
             index: true,
         },
-        game_name: {
+        name: {
             type: String,
             required: true,
         },
-        game_subject: {
+        subject: {
             type: String,
             required: true,
         },

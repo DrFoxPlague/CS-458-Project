@@ -8,7 +8,7 @@ const ExhibitSchema = new Schema(
             unique: true,
             index: true,
         },
-        ex_name: {
+        name: {
             type: String,
             required: true,
         },

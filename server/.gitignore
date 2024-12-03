@@ -178,3 +178,4 @@ dist
 # Deprecated files
 *.deprecated.*
 .deprecated/
+*.deprecated

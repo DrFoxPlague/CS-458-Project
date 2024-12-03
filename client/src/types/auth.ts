@@ -4,9 +4,18 @@ export type User = {
     email: string;
     grade: string;
     dob: Date | null;
-    bdg_coll: string[]; 
-    is_staff: boolean;
-    prof_pic: string;
+    badges: Badge[]; 
+    isStaff: boolean;
+    profilePicture: string;
+}
+
+export type Badge = {
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+    category: string;
+    type: string;  
 }
 
 export type UserWithToken = User & {

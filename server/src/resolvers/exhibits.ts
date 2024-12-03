@@ -30,10 +30,10 @@ export default {
         createExhibit: async (
             _: any,
             {
-                ex_name,
+                name,
                 content,
             }: {
-                ex_name: string;
+                name: string;
                 content: { title?: string; body?: string; media?: any };
             },
             context: { isStaff: boolean }
@@ -74,7 +74,7 @@ export default {
 
                 const exhibit = new ExhibitModel({
                     _id: GenID.exhibit(),
-                    ex_name,
+                    name,
                     content: {
                         title,
                         body,
@@ -95,11 +95,11 @@ export default {
             _: any,
             {
                 id,
-                ex_name,
+                name,
                 content,
             }: {
                 id: string;
-                ex_name?: string;
+                name?: string;
                 content?: { title?: string; body?: string; media?: any };
             },
             context: { isStaff: boolean }
@@ -135,7 +135,7 @@ export default {
                     });
                 }
 
-                if (ex_name) exhibit.ex_name = ex_name;
+                if (name) exhibit.name = name;
 
                 if (content) {
                     const { title, body, media } = content;

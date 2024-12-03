@@ -26,3 +26,4 @@ dist-ssr
 # Deprecated files
 *.deprecated.*
 .deprecated/
+*.deprecated

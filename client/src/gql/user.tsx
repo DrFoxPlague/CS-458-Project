@@ -3,8 +3,8 @@ import { gql } from "@apollo/client";
 export const CreateOrUpdateUser = gql`
     mutation CreateorUpdateUser($input: UserInput!) {
         createOrUpdateUser(input: $input) {
-            grade
             dob
+            grade
         }
     }
 `;
@@ -27,13 +27,14 @@ export const GetUser = gql`
             email
             grade
             dob
-            bdg_coll {
+            badges {
                 id
-                bdg_name
-                bdg_type
+                name
+                description
+                type
             }
-            is_staff
-            prof_pic
+            isStaff
+            profilePicture
         }
     }
 `;
@@ -46,13 +47,14 @@ export const GetUsers = gql`
             email
             grade
             dob
-            bdg_coll {
+            badges {
                 id
-                bdg_name
-                bdg_type
+                name
+                description
+                type
             }
-            is_staff
-            prof_pic
+            isStaff
+            profilePicture
         }
     }
 `;
