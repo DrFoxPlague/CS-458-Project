@@ -4,8 +4,9 @@ import GenID from "../util/GenID";
 
 export default {
     Query: {
-        getExhibit: async (_: any, { _id }: { _id: string }) => {
-            const exhibit = await ExhibitModel.findOne({ _id });
+        getExhibit: async (_: any, { id }: { id: string }) => {
+            // const exhibit = await ExhibitModel.findOne({ _id }); // We need to use findById
+            const exhibit = await ExhibitModel.findById(id);
 
             if (!exhibit) {
                 throw new GraphQLError("Exhibit not found!", {
@@ -13,23 +14,28 @@ export default {
                         errors: [
                             {
                                 type: "exhibit",
-                                message: "Exhibit not found!"
-                            }
-                        ]
-                    }
+                                message: "Exhibit not found!",
+                            },
+                        ],
+                    },
                 });
             }
 
             return exhibit;
         },
 
-        getExhibits: async () => (await ExhibitModel.find()).toSorted()
+        getExhibits: async () => (await ExhibitModel.find()).toSorted(),
     },
     Mutation: {
         createExhibit: async (
-            _: any, 
-            {ex_name, content}: {ex_name: string, content: 
-                {title?: string, body?: string, media?: any}},
+            _: any,
+            {
+                ex_name,
+                content,
+            }: {
+                ex_name: string;
+                content: { title?: string; body?: string; media?: any };
+            },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -39,10 +45,10 @@ export default {
                             errors: [
                                 {
                                     type: "authentication",
-                                    message: "Staff member not authenticated!"
-                                }
-                            ]
-                        }
+                                    message: "Staff member not authenticated!",
+                                },
+                            ],
+                        },
                     });
                 }
 
@@ -52,10 +58,10 @@ export default {
                             errors: [
                                 {
                                     type: "content",
-                                    message: "Exhibit cannot be empty!"
-                                }
-                            ]
-                        }
+                                    message: "Exhibit cannot be empty!",
+                                },
+                            ],
+                        },
                     });
                 }
 
@@ -72,26 +78,31 @@ export default {
                     content: {
                         title,
                         body,
-                        media: mediaFile
+                        media: mediaFile,
                     },
-                    game: null
+                    game: null,
                 });
 
                 await exhibit.save();
 
                 return exhibit;
-
             } catch (err) {
                 throw err;
             }
         },
-        
+
         updateExhibit: async (
             _: any,
-            { _id, ex_name, content }:
-            { _id: string, ex_name?: string, content?: 
-                {title?: string, body?: string, media?: any}},
-            context: { isStaff: boolean }    
+            {
+                id,
+                ex_name,
+                content,
+            }: {
+                id: string;
+                ex_name?: string;
+                content?: { title?: string; body?: string; media?: any };
+            },
+            context: { isStaff: boolean }
         ) => {
             try {
                 if (!context.isStaff) {
@@ -100,14 +111,15 @@ export default {
                             errors: [
                                 {
                                     type: "authentication",
-                                    message: "Staff member not authenticated!"
-                                }
-                            ]
-                        }
+                                    message: "Staff member not authenticated!",
+                                },
+                            ],
+                        },
                     });
                 }
 
-                const exhibit = await ExhibitModel.findOne({ _id });
+                // const exhibit = await ExhibitModel.findOne({ _id }); // We need to use findById
+                const exhibit = await ExhibitModel.findById(id);
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {
@@ -115,10 +127,11 @@ export default {
                             errors: [
                                 {
                                     type: "not_found",
-                                    message: "Exhibit not found! Please check the ID."
-                                }
-                            ]
-                        }
+                                    message:
+                                        "Exhibit not found! Please check the ID.",
+                                },
+                            ],
+                        },
                     });
                 }
 
@@ -130,11 +143,9 @@ export default {
                     if (title) content.title = title;
                     if (body) content.body = body;
                     if (media) content.media = await media;
-
                 }
 
                 await exhibit.save();
-                
             } catch (err) {
                 throw err;
             }
@@ -142,7 +153,7 @@ export default {
 
         deleteExhibit: async (
             _: any,
-            { _id }: { _id: string },
+            { id }: { id: string },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -152,14 +163,15 @@ export default {
                             errors: [
                                 {
                                     type: "authentication",
-                                    message: "Staff member not authenticated!"
-                                }
-                            ]
-                        }
+                                    message: "Staff member not authenticated!",
+                                },
+                            ],
+                        },
                     });
                 }
 
-                const exhibit = await ExhibitModel.findOne({ _id });
+                // const exhibit = await ExhibitModel.findOne({ _id }); // We need to use findById
+                const exhibit = await ExhibitModel.findById(id);
 
                 if (!exhibit) {
                     throw new GraphQLError("Exhibit not found!", {
@@ -167,20 +179,21 @@ export default {
                             errors: [
                                 {
                                     type: "not_found",
-                                    message: "Exhibit not found! Please check the ID."
-                                }
-                            ]
-                        }
+                                    message:
+                                        "Exhibit not found! Please check the ID.",
+                                },
+                            ],
+                        },
                     });
                 }
 
-                await ExhibitModel.findByIdAndDelete({ _id });
+                // await ExhibitModel.findByIdAndDelete({ _id }); // We need to use deleteOne, since we dont need to find it again
+                await exhibit.deleteOne();
 
                 return exhibit;
-
             } catch (err) {
                 throw err;
             }
-        }
-    }
-}
+        },
+    },
+};

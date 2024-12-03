@@ -26,21 +26,21 @@ input UserInput {
 }
 # ------
 
-
 # User Schemas
 type User {
-    id: ID!
+    token: String
+    id: String!
     name: String!
     email: String!
-    grade: String!
-    dob: Date!
+    grade: String
+    dob: Date
     bdg_coll: [Badge]!
     is_staff: Boolean!
     prof_pic: String!
 }
 
 #type Staff {
-#    id: ID!
+#    id: String!
 #    name: String!
 #    email: String!
 #    phone_num: String!
@@ -48,7 +48,7 @@ type User {
 
 # Badge Schemas
 type Badge {
-    id: ID!
+    id: String!
     bdg_name: String!
     bdg_type: String!
 }
@@ -63,7 +63,7 @@ type ExhibitContent {
 }
 
 type Exhibit {
-    id: ID!
+    id: String!
     ex_name: String!
     content: ExhibitContent!
     game: Game
@@ -71,52 +71,53 @@ type Exhibit {
 
 # Game Schemas - NEEDS TO BE EXPANDED!!!
 type Game {
-    id: ID!
+    id: String!
     game_name: String!
     game_subject: String!
     questions: [Question]!
 }
 
 type TriviaQuestion {
-    id: ID!
+    id: String!
     question: String!
     choices: [String]!
     answer: String!
 }
 
-union Question = TriviaQuestion     # use pipe operator to extend different question types
-
+union Question = TriviaQuestion # use pipe operator to extend different question types
 type Query {
     # User Queries
-    getUser(id: ID!): User!
+    getUser(id: String!): User!
     getUsers: [User]!
 
     # Staff Queries
-    # getStaff(id: ID!): Staff!
+    # getStaff(id: String!): Staff!
     # getStaffMembers: [Staff]!
 
     # Badge Queries
-    getBadge(id: ID!): Badge!
+    getBadge(id: String!): Badge!
     getBadges: [Badge]!
 
     # Exhibit Queries
-    getExhibit(id: ID!): Exhibit!
+    getExhibit(id: String!): Exhibit!
     getExhibits: [Exhibit]!
 
     # Game Queries
-    getGame(id: ID!): Game!
+    getGame(id: String!): Game!
     getGames: [Game]!
 }
 
-
 type Mutation {
     # User Mutations
+    generateGoogleAuthURL: String!
+    login(code: String!): User!
+
     createOrUpdateUser(input: UserInput): User!
 
-    deleteUser(id: ID!): User!
+    deleteUser(id: String!): User!
 
     #updateUser(
-    #    id: ID!,
+    #    id: String!,
     #    name: String,
     #    email: String,
     #    grade: String,
@@ -129,11 +130,11 @@ type Mutation {
     #    email: String!,
     #    phone_num: String!
     #): Staff!
-    
-    #deleteStaff(id: ID!): Staff!
+
+    #deleteStaff(id: String!): Staff!
 
     #updateStaff(
-    #    id: ID!,
+    #    id: String!,
     #    name: String,
     #    email: String,
     #    phone_num: String
@@ -142,45 +143,37 @@ type Mutation {
     # Badge Mutations
     createBadge(bdg_name: String!, bdg_type: String!): Badge!
 
-    deleteBadge(id: ID!): Badge!
+    deleteBadge(id: String!): Badge!
 
-    updateBadge(id: ID!, bdg_name: String, bdg_type: String): Badge!
+    updateBadge(id: String!, bdg_name: String, bdg_type: String): Badge!
 
     # Exhibit Mutations
-    createExhibit(
-        ex_name: String!,
-        content: ExhibitContentInput!
-    ): Exhibit!
+    createExhibit(ex_name: String!, content: ExhibitContentInput!): Exhibit!
 
-    deleteExhibit(id: ID!): Exhibit!
+    deleteExhibit(id: String!): Exhibit!
 
     updateExhibit(
-        id: ID!,
-        ex_name: String,
+        id: String!
+        ex_name: String
         content: ExhibitContentInput
     ): Exhibit!
 
     # Game Mutations
     createGame(input: GameDataInput!): Game!
 
-    deleteGame(id: ID!): Game!
+    deleteGame(id: String!): Game!
 
-    updateGame(id: ID!, input: GameDataInput!): Game!
+    updateGame(id: String!, input: GameDataInput!): Game!
 
-    createTrivQues(
-        input: QuestionInput!
-    ): TriviaQuestion!
+    createTrivQues(input: QuestionInput!): TriviaQuestion!
 
-    deleteTrivQues(id: ID!): TriviaQuestion!
+    deleteTrivQues(id: String!): TriviaQuestion!
 
-    updateTrivQues(
-        id: ID!,
-        input: QuestionInput
-    ): TriviaQuestion!
+    updateTrivQues(id: String!, input: QuestionInput): TriviaQuestion!
 
-    addQuestion(gameId: ID!, question: ID!): Game!
+    addQuestion(gameId: String!, question: String!): Game!
 
-    removeQuestion(gameId: ID!, question: ID!): Game!
+    removeQuestion(gameId: String!, question: String!): Game!
 }
 
 # TO-DO:

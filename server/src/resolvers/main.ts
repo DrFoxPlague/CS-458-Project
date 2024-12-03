@@ -5,6 +5,7 @@ import exhibits from "./exhibits";
 import user from "./user";
 import games from "./games";
 import badges from "./badges";
+import google from "./auth";
 
 export const resolvers = {
     Query: {
@@ -19,6 +20,7 @@ export const resolvers = {
         //...staff.Mutation,
         ...user.Mutation,
         ...games.Mutation,
-        ...badges.Mutation
+        ...badges.Mutation,
+        ...google.Mutation
     }
 } as any;
