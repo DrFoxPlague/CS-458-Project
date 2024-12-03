@@ -33,7 +33,7 @@ export const GetUser = gql`
                 description
                 type
             }
-            isStaff
+            staff
             profilePicture
         }
     }
@@ -53,7 +53,7 @@ export const GetUsers = gql`
                 description
                 type
             }
-            isStaff
+            staff
             profilePicture
         }
     }

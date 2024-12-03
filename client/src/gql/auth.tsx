@@ -21,7 +21,7 @@ export const LoginUser = gql`
                 description
                 type
             }
-            isStaff
+            staff
             profilePicture
         }
     }

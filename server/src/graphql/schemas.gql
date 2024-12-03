@@ -35,7 +35,7 @@ type User {
     grade: String
     dob: Date
     badges: [Badge]!
-    isStaff: Boolean!
+    staff: Boolean!
     profilePicture: String!
 }
 

@@ -5,7 +5,7 @@ export type User = {
     grade: string;
     dob: Date | null;
     badges: Badge[]; 
-    isStaff: boolean;
+    staff: boolean;
     profilePicture: string;
 }
 

@@ -11,7 +11,7 @@ import BadgeModel from "../schemas/Badge";
 
 export const resolvers = {
     User: {
-        badges: (parent: any) => BadgeModel.find({ _id: { $in: parent.badges } }),
+        badges: async (parent: any) => await BadgeModel.find({ _id: { $in: parent.badges } }),
     },
     Query: {
         ...exhibits.Query,
