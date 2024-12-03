@@ -14,6 +14,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { ExhibitLayout } from "./exhibits/ExhibitLayout";
 import { LoginPage, FollowUpPage } from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
+import { HomePage } from "./home/HomePage";
 
 const httpLink = createHttpLink({
     uri: "http://localhost:4000/graphql",
@@ -61,7 +62,7 @@ const App = () => {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<FollowUpPage />} />
                     <Route path="*" element={<ErrorPage />} />
-                    {/* <Route path="/home" element={<HomePage />} /> */}
+                    <Route path="/home" element={<HomePage />} />
                 </Routes>
             </Router>
         </ApolloProvider>
