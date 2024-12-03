@@ -12,6 +12,14 @@ const BadgeSchema = new Schema(
             type: String,
             required: true,
         },
+        bdg_desc: {
+            type: String,
+            required: true,
+        },
+        bdg_img: {
+            type: String,
+            required: true,
+        },
         bdg_type: {
             type: String,
             required: true,

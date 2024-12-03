@@ -6,8 +6,13 @@ import user from "./user";
 import games from "./games";
 import badges from "./badges";
 import google from "./auth";
+import UserModel from "../schemas/User";
+import BadgeModel from "../schemas/Badge";
 
 export const resolvers = {
+    User: {
+        badges: (parent: any) => BadgeModel.find({ _id: { $in: parent.badges } }),
+    },
     Query: {
         ...exhibits.Query,
         //...staff.Query,
