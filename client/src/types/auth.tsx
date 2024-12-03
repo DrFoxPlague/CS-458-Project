@@ -8,3 +8,8 @@ export type User = {
     is_staff: boolean;
     prof_pic: string;
 }
+
+export type AuthState = {
+    user: User | null;
+    setUser: () => Promise<void>;
+}
