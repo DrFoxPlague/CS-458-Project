@@ -4,19 +4,17 @@ export type User = {
     email: string;
     grade: string;
     dob: Date | null;
-    badges: Badge[]; 
+    badges: Badge[];
     staff: boolean;
     profilePicture: string;
-}
+};
 
 export type Badge = {
     id: string;
     name: string;
     description: string;
-    image: string;
-    category: string;
-    type: string;  
-}
+    type: string;
+};
 
 export type UserWithToken = User & {
     token: string;
@@ -26,4 +24,4 @@ export type AuthState = {
     user: User | null;
     isLoggedIn: boolean;
     setUser: (user: User) => void;
-}
+};

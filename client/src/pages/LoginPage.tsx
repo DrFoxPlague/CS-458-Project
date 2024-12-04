@@ -20,10 +20,9 @@ import { GenerateGoogleUrl, LoginUser } from "../gql/auth";
 export const LoginPage = () => {
     const successCode = new URLSearchParams(window.location.search).get("code");
 
-    const user = useAuthStore((state) => state.user);
-    const setUser = useAuthStore((state) => state.setUser);
+    const { user, setUser } = useAuthStore();
 
-    const [loginUser] = useMutation(LoginUser, {
+    const [loginUser, { loading }] = useMutation(LoginUser, {
         onCompleted: ({ login: loginData }) => {
             const { token, ...rest } = loginData;
             localStorage.setItem("token", token);
@@ -47,6 +46,7 @@ export const LoginPage = () => {
         }
     }, [successCode, loginUser]);
 
+    if (loading) return <></>;
     if (user && !user.grade && !user.dob) return <Navigate to="/signup" />;
     if (user) return <Navigate to="/" />;
 

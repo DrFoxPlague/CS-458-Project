@@ -2,16 +2,19 @@ import GameModel from "../schemas/Game/Game";
 import TriviaQuestionModel from "../schemas/Game/TriviaQuestion";
 import { GraphQLError } from "graphql";
 import GenID from "../util/GenID";
+import ExhibitModel from "../schemas/Exhibit";
 
 type GameDataInput = {
     name: string;
     subject: string;
+    exhibit: string;
 };
 
 type QuestionInput = {
     question: string;
     choices: string[];
     answer: string;
+    game: string;
 };
 
 export default {
@@ -50,6 +53,32 @@ export default {
         },
 
         getGames: async () => (await GameModel.find()).toSorted(),
+
+        checkQuestion: async (
+            _: any,
+            { id, answer }: { id: string; answer: string }
+        ) => {
+            try {
+                const triviaQuestion = await TriviaQuestionModel.findById(id);
+
+                if (!triviaQuestion) {
+                    throw new GraphQLError("Trivia question not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "trivia question",
+                                    message: "Trivia question not found!",
+                                },
+                            ],
+                        },
+                    });
+                }
+
+                return triviaQuestion.answer === answer;
+            } catch (err) {
+                throw err;
+            }
+        },
     },
     Mutation: {
         createGame: async (
@@ -72,21 +101,37 @@ export default {
                     });
                 }
 
+                const exhibit = await ExhibitModel.findById(input.exhibit);
+                if (!exhibit)
+                    throw new GraphQLError("Exhibit not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "exhibit",
+                                    message: "Exhibit not found!",
+                                },
+                            ],
+                        },
+                    });
+
                 const game = new GameModel({
                     _id: GenID.game(),
                     name: input.name,
                     subject: input.subject,
+                    exhibit: input.exhibit,
                     questions: [],
                 });
 
+                exhibit.game = game._id;
+
                 await game.save();
+                await exhibit.save();
 
                 return game;
             } catch (err) {
                 throw err;
             }
         },
-
         updateGame: async (
             _: any,
             { id, input }: { id: string; input: Partial<GameDataInput> },
@@ -124,6 +169,7 @@ export default {
 
                 if (input.name) game.name = input.name;
                 if (input.subject) game.subject = input.subject;
+                if (input.exhibit) game.exhibit = input.exhibit;
 
                 await game.save();
 
@@ -177,7 +223,7 @@ export default {
             }
         },
 
-        createTrivQues: async (
+        createQuestion: async (
             _: any,
             { input }: { input: QuestionInput },
             context: { isStaff: boolean }
@@ -196,14 +242,31 @@ export default {
                     });
                 }
 
+                const game = await GameModel.findById(input.game);
+                if (!game)
+                    throw new GraphQLError("Game not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "game",
+                                    message: "Game not found!",
+                                },
+                            ],
+                        },
+                    });
+
                 const triviaQuestion = new TriviaQuestionModel({
                     _id: GenID.triviaQuestion(),
                     question: input.question,
                     choices: input.choices,
                     answer: input.answer,
+                    game: input.game,
                 });
 
+                game.questions.push(triviaQuestion._id);
+
                 await triviaQuestion.save();
+                await game.save();
 
                 return triviaQuestion;
             } catch (err) {
@@ -211,7 +274,7 @@ export default {
             }
         },
 
-        updateTrivQues: async (
+        updateQuestion: async (
             _: any,
             { id, input }: { id: string; input: QuestionInput },
             context: { isStaff: boolean }
@@ -248,6 +311,7 @@ export default {
                 if (input.question) triviaQuestion.question = input.question;
                 if (input.choices) triviaQuestion.choices = input.choices;
                 if (input.answer) triviaQuestion.answer = input.answer;
+                if (input.game) triviaQuestion.game = input.game;
 
                 await triviaQuestion.save();
 
@@ -257,7 +321,7 @@ export default {
             }
         },
 
-        deleteTrivQues: async (
+        deleteQuestion: async (
             _: any,
             { id }: { id: string },
             context: { isStaff: boolean }
@@ -294,113 +358,6 @@ export default {
                 await triviaQuestion.deleteOne();
 
                 return triviaQuestion;
-            } catch (err) {
-                throw err;
-            }
-        },
-
-        addQuestion: async (
-            _: any,
-            { gameId, question }: { gameId: string; question: string },
-            context: { isStaff: boolean }
-        ) => {
-            try {
-                if (!context.isStaff) {
-                    throw new GraphQLError("Not authenticated!", {
-                        extensions: {
-                            errors: [
-                                {
-                                    type: "authentication",
-                                    message: "Staff member not authenticated!",
-                                },
-                            ],
-                        },
-                    });
-                }
-
-                const game = await GameModel.findById(gameId);
-
-                if (!game) {
-                    throw new GraphQLError("Game not found!", {
-                        extensions: {
-                            errors: [
-                                {
-                                    type: "game",
-                                    message: "Game not found!",
-                                },
-                            ],
-                        },
-                    });
-                }
-
-                if (question) game.questions.push(question);
-
-                await game.save();
-
-                return game;
-            } catch (err) {
-                throw err;
-            }
-        },
-
-        removeQuestion: async (
-            _: any,
-            { gameId, question }: { gameId: string; question: string },
-            context: { isStaff: boolean }
-        ) => {
-            try {
-                if (!context.isStaff) {
-                    throw new GraphQLError("Not authenticated!", {
-                        extensions: {
-                            errors: [
-                                {
-                                    type: "authentication",
-                                    message: "Staff member not authenticated!",
-                                },
-                            ],
-                        },
-                    });
-                }
-
-                const game = await GameModel.findById(gameId);
-
-                if (!game) {
-                    throw new GraphQLError("Game not found!", {
-                        extensions: {
-                            errors: [
-                                {
-                                    type: "game",
-                                    message: "Game not found!",
-                                },
-                            ],
-                        },
-                    });
-                }
-
-                if (question) {
-                    const qIdx = game.questions.findIndex(
-                        (qID: string) => qID === question
-                    );
-
-                    if (qIdx === -1) {
-                        throw new GraphQLError("Question not found in array!", {
-                            extensions: {
-                                errors: [
-                                    {
-                                        type: "question",
-                                        message: "Question not found in array!",
-                                    },
-                                ],
-                            },
-                        });
-                    }
-
-                    game.questions.splice(qIdx, 1);
-
-                    await game.save();
-
-                    return game;
-                }
             } catch (err) {
                 throw err;
             }

@@ -3,149 +3,149 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #f0f4f8a9;    /* Background color */
-  --button-color: #4c9f70;        /* Button color */
-  --hover-color: #387e56;         /* Hover and accent color */
-  --text-color: #1f2933;          /* Text color */
-  --highlight-color: #ffd166;     /* Highlight color */
-  --error-color: #ef476f;         /* Highlight color */
+    --background-color: #f0f4f8a9; /* Background color */
+    --button-color: #4c9f70; /* Button color */
+    --hover-color: #387e56; /* Hover and accent color */
+    --text-color: #1f2933; /* Text color */
+    --highlight-color: #ffd166; /* Highlight color */
+    --error-color: #ef476f; /* Highlight color */
+    --success-color: #06d6a0; /* Highlight color */
 }
 
 #root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
-
 body {
-  font-family: 'Arial', sans-serif; /* Update the font if desired */
-  background-color: var(--background-color); /* Set background color */
-  color: var(--text-color); /* Use text color */
+    font-family: "Arial", sans-serif; /* Update the font if desired */
+    background-color: var(--background-color); /* Set background color */
+    color: var(--text-color); /* Use text color */
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full height of the viewport */
-  width: 100vw; /* Full width of the viewport */
-  box-sizing: border-box; /* Ensures padding is included in width and height calculations */
-  padding: 1rem; /* Padding to prevent content from touching screen edges */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw; /* Full width of the viewport */
+    box-sizing: border-box; /* Ensures padding is included in width and height calculations */
+    padding: 1rem; /* Padding to prevent content from touching screen edges */
 }
 
 .logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem; /* Adds some space below the logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem; /* Adds some space below the logo */
 }
 
 .logo {
-  max-width: 150px; /* Adjust the size of your logo */
-  height: auto;     /* Keep aspect ratio */
+    max-width: 150px; /* Adjust the size of your logo */
+    height: auto; /* Keep aspect ratio */
 }
 
 .subject-selection {
-  text-align: center;
+    text-align: center;
 }
 
 .subject-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 .subject-grid button {
-  padding: 2rem;
-  font-size: 1.5rem;
-  border: none;
-  cursor: pointer;
-  background-color: var(--button-color);
-  color: var(--text-color);
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    padding: 2rem;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .subject-grid button:hover {
-  background-color: var(--hover-color);
+    background-color: var(--hover-color);
 }
 
 .subject-grid button:focus {
-  outline: 3px solid #007BFF; /* Optional outline for accessibility */
-  outline-offset: 4px;
+    outline: 3px solid #007bff; /* Optional outline for accessibility */
+    outline-offset: 4px;
 }
 
 .subject-grid button:active {
-  transform: scale(0.98);
+    transform: scale(0.98);
 }
 
 .quiz {
-  text-align: center;
-  padding: 2rem; /* Improved spacing */
-  background-color: var(--highlight-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for a floating effect */
+    text-align: center;
+    padding: 2rem; /* Improved spacing */
+    background-color: var(--highlight-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for a floating effect */
 }
 
 .options {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .options button {
-  padding: 1rem;
-  font-size: 1.2rem;
-  border: none;
-  cursor: pointer;
-  background-color: var(--button-color);
-  color: var(--text-color);
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .options button:hover {
-  background-color: var(--hover-color);
+    background-color: var(--hover-color);
 }
 
 .options button:focus {
-  outline: 3px solid #007BFF; /* Optional outline for accessibility */
-  outline-offset: 4px;
+    outline: 3px solid #007bff; /* Optional outline for accessibility */
+    outline-offset: 4px;
 }
 
 .options button:active {
-  transform: scale(0.98);
+    transform: scale(0.98);
 }
 
 .feedback {
-  font-weight: bold;
-  margin-top: 10px;
-  animation: fadeIn 0.5s ease-in-out;
-  padding: 1rem;
-  border-radius: 8px;
+    font-weight: bold;
+    margin-top: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+    padding: 1rem;
+    border-radius: 8px;
 }
 
 .feedback.correct {
-  color: var(--hover-color);
-  background-color: var(--highlight-color);
+    color: var(--text-color);
+    background-color: var(--success-color);
 }
 
 .feedback.wrong {
-  color: var(--text-color);
-  background-color: var(--error-color);
+    color: var(--text-color);
+    background-color: var(--error-color);
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -31,10 +31,12 @@ export default {
             _: any,
             {
                 name,
-                content,
+                description,
+                image,
             }: {
                 name: string;
-                content: { title?: string; body?: string; media?: any };
+                description: string;
+                image: string;
             },
             context: { isStaff: boolean }
         ) => {
@@ -52,35 +54,11 @@ export default {
                     });
                 }
 
-                if (!content.title && !content.body) {
-                    throw new GraphQLError("Exhibit cannot be empty!", {
-                        extensions: {
-                            errors: [
-                                {
-                                    type: "content",
-                                    message: "Exhibit cannot be empty!",
-                                },
-                            ],
-                        },
-                    });
-                }
-
-                const { title, body, media } = content;
-                let mediaFile = null;
-
-                if (media) {
-                    mediaFile = await media;
-                }
-
                 const exhibit = new ExhibitModel({
                     _id: GenID.exhibit(),
                     name,
-                    content: {
-                        title,
-                        body,
-                        media: mediaFile,
-                    },
-                    game: null,
+                    description,
+                    image,
                 });
 
                 await exhibit.save();
@@ -96,11 +74,14 @@ export default {
             {
                 id,
                 name,
-                content,
+                description,
+                game,
             }: {
                 id: string;
                 name?: string;
-                content?: { title?: string; body?: string; media?: any };
+                description?: string;
+                game?: string;
+                image?: string;
             },
             context: { isStaff: boolean }
         ) => {
@@ -136,14 +117,8 @@ export default {
                 }
 
                 if (name) exhibit.name = name;
-
-                if (content) {
-                    const { title, body, media } = content;
-
-                    if (title) content.title = title;
-                    if (body) content.body = body;
-                    if (media) content.media = await media;
-                }
+                if (description) exhibit.description = description;
+                if (game) exhibit.game = game;
 
                 await exhibit.save();
             } catch (err) {

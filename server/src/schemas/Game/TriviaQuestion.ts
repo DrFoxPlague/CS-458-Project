@@ -20,6 +20,10 @@ const TriviaQuestionSchema = new Schema(
             type: String,
             required: true,
         },
+        game: {
+            type: String,
+            required: true,
+        },
     },
     {
         virtuals: {

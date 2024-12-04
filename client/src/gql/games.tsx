@@ -6,8 +6,11 @@ export const CreateGame = gql`
             id
             name
             subject
+            exhibit
             questions {
                 id
+                question
+                choices
             }
         }
     }
@@ -31,6 +34,8 @@ export const UpdateGame = gql`
             subject
             questions {
                 id
+                question
+                choices
             }
         }
     }
@@ -44,6 +49,12 @@ export const CreateTrivQues = gql`
             choices
             answer
         }
+    }
+`;
+
+export const CheckQuestion = gql`
+    query checkQuestion($id: String!, $answer: String!) {
+        checkQuestion(id: $id, answer: $answer)
     }
 `;
 
@@ -103,6 +114,8 @@ export const GetGame = gql`
             subject
             questions {
                 id
+                question
+                choices
             }
         }
     }

@@ -29,7 +29,11 @@ export default {
     Mutation: {
         createBadge: async (
             _: any,
-            { name, description, type }: { name: string; description: string; type: string },
+            {
+                name,
+                description,
+                type,
+            }: { name: string; description: string; type: string },
             context: { isStaff: boolean }
         ) => {
             try {
@@ -50,7 +54,7 @@ export default {
                     _id: GenID.badge(),
                     name,
                     description,
-                    type
+                    type,
                 });
 
                 await badge.save();
@@ -68,7 +72,12 @@ export default {
                 name,
                 description,
                 type,
-            }: { id: string; name?: string; description?: string; type?: string },
+            }: {
+                id: string;
+                name?: string;
+                description?: string;
+                type?: string;
+            },
             context: { isStaff: boolean }
         ) => {
             try {

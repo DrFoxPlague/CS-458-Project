@@ -16,9 +16,13 @@ const GameSchema = new Schema(
             type: String,
             required: true,
         },
+        exhibit: {
+            type: String,
+            required: true,
+        },
         questions: {
-            type: Array,
-            default: null,
+            type: [String],
+            default: [],
         },
     },
     {

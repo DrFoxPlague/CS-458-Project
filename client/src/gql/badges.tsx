@@ -29,7 +29,7 @@ export const UpdateBadge = gql`
             name
             description
             type
-            }
+        }
     }
 `;
 

@@ -11,10 +11,11 @@ import { setContext } from "@apollo/client/link/context";
 import createHttpLink from "apollo-upload-client/createUploadLink.mjs";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorPage } from "./pages/ErrorPage";
-import { TestExhibitLayout } from "./exhibits/TestExhibitLayout";
+import { ExhibitPage } from "./pages/Exhibit.page";
 import { LoginPage, FollowUpPage } from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
 import { HomePage } from "./home/HomePage";
+import { GamePage } from "./pages/Game.page";
 
 const httpLink = createHttpLink({
     uri: "http://localhost:4000/graphql",
@@ -57,9 +58,10 @@ const App = () => {
             />
             <Router>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />           
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/exhibit/:id" element={<ExhibitPage />} />
+                    <Route path="/game/:id" element={<GamePage />} />
                     <Route path="/test" element={<TestGame />} />
-                    <Route path="/exhibit" element={<TestExhibitLayout />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<FollowUpPage />} />
                     <Route path="*" element={<ErrorPage />} />

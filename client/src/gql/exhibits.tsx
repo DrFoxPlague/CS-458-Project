@@ -5,13 +5,9 @@ export const CreateExhibit = gql`
         createExhibit(name: $name, content: $content) {
             id
             name
-            content {
-                title
-                body
-                image
-                audio
-                video
-            }
+            description
+            game
+            image
         }
     }
 `;
@@ -25,13 +21,9 @@ export const UpdateExhibit = gql`
         updateExhibit(id: $id, name: $name, content: $content) {
             id
             name
-            content {
-                title
-                body
-                image
-                audio
-                video
-            }
+            description
+            game
+            image
         }
     }
 `;
@@ -41,13 +33,9 @@ export const DeleteExhibit = gql`
         deleteExhibit(id: $id) {
             id
             name
-            content {
-                title
-                body
-                image
-                audio
-                video
-            }
+            description
+            game
+            image
         }
     }
 `;
@@ -57,13 +45,11 @@ export const GetExhibit = gql`
         getExhibit(id: $id) {
             id
             name
-            content {
-                title
-                body
-                image
-                audio
-                video
+            description
+            game {
+                id
             }
+            image
         }
     }
 `;
@@ -73,13 +59,8 @@ export const GetExhibits = gql`
         getExhibits {
             id
             name
-            content {
-                title
-                body
-                image
-                audio
-                video
-            }
+            description
+            game
         }
     }
 `;

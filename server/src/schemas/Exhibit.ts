@@ -12,31 +12,17 @@ const ExhibitSchema = new Schema(
             type: String,
             required: true,
         },
-        content: {
-            title: {
-                type: String,
-                default: null,
-            },
-            body: {
-                type: String,
-                default: null,
-            },
-            image: {
-                type: String,
-                default: null,
-            },
-            audio: {
-                type: String,
-                default: null,
-            },
-            video: {
-                type: String,
-                default: null,
-            },
+        description: {
+            type: String,
+            required: true,
         },
         game: {
             type: String,
             default: null,
+        },
+        image: {
+            type: String,
+            required: true,
         },
     },
     {
