@@ -35,13 +35,6 @@ type User {
     profilePicture: String!
 }
 
-#type Staff {
-#    id: String!
-#    name: String!
-#    email: String!
-#    phone_num: String!
-#}
-
 # Badge Schemas
 type Badge {
     id: String!
@@ -60,7 +53,7 @@ type Exhibit {
     image: String!
 }
 
-# Game Schemas - NEEDS TO BE EXPANDED!!!
+# Game Schemas - Expand as needed for future game/questions
 type Game {
     id: String!
     name: String!
@@ -78,14 +71,11 @@ type TriviaQuestion {
 }
 
 union Question = TriviaQuestion # use pipe operator to extend different question types
+
 type Query {
     # User Queries
     getUser(id: String!): User!
     getUsers: [User]!
-
-    # Staff Queries
-    # getStaff(id: String!): Staff!
-    # getStaffMembers: [Staff]!
 
     # Badge Queries
     getBadge(id: String!): Badge!
@@ -98,13 +88,13 @@ type Query {
     # Game Queries
     getGame(id: String!): Game!
     getGames: [Game]!
-
     checkQuestion(id: String!, answer: String!): Boolean!
 }
 
 type Mutation {
     # User Mutations
     generateGoogleAuthURL: String!
+
     login(code: String!): User!
 
     createOrUpdateUser(input: UserInput): User!
@@ -112,30 +102,6 @@ type Mutation {
     awardBadge(id: String!): User!
 
     deleteUser(id: String!): User!
-
-    #updateUser(
-    #    id: String!,
-    #    name: String,
-    #    email: String,
-    #    grade: String,
-    #   dob: Date
-    #): User!
-
-    # Staff Mutations
-    #createStaff(
-    #    name: String!,
-    #    email: String!,
-    #    phone_num: String!
-    #): Staff!
-
-    #deleteStaff(id: String!): Staff!
-
-    #updateStaff(
-    #    id: String!,
-    #    name: String,
-    #    email: String,
-    #    phone_num: String
-    #): Staff!
 
     # Badge Mutations
     createBadge(name: String!, description: String!, type: String!): Badge!
@@ -177,4 +143,9 @@ type Mutation {
 }
 
 # TO-DO:
-#   - expand game schemas to accomodate different game types
+# ---
+#   * Expand question types
+#   * Add additional media for exhibits
+#   * Change badge icons to store in database rather than hard coded
+
+# MAY POSSIBLY DEPRECATE GRAPHQL API IN FAVOR OF A REST API!!!
