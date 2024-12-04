@@ -1,4 +1,4 @@
-import { Paper, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Badge as BadgeType } from "../../types/auth";
 
 export const Badge = ({ badge }: { badge: BadgeType }) => {

@@ -80,6 +80,55 @@ export default {
             }
         },
 
+        awardBadge: async (
+            _: any,
+            { id }: { id: string },
+            { user }: { user: User }
+        ) => {
+            try {
+                // const userID = context.req?.user?.id; // Cleaner way to get user ID below
+
+                if (!user.id) {
+                    throw new GraphQLError("Not authenticated with Google!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "authentication",
+                                    message:
+                                        "Please authenticate with Google first!",
+                                },
+                            ],
+                        },
+                    });
+                }
+
+                const userDoc = await UserModel.findById(user.id);
+
+                if (!userDoc) {
+                    throw new GraphQLError("User not found!", {
+                        extensions: {
+                            errors: [
+                                {
+                                    type: "user",
+                                    message: "User not found!",
+                                },
+                            ],
+                        },
+                    });
+                }
+
+                if (!userDoc.badges.includes(id)) {
+                    userDoc.badges.push(id);
+                }
+
+                await userDoc.save();
+
+                return user;
+            } catch (err) {
+                throw err;
+            }
+        },
+
         deleteUser: async (_: any, { id }: { id: string }) => {
             try {
                 // const user = await UserModel.findOne({ id }); // We need to use findById

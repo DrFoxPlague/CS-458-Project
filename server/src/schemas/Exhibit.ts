@@ -20,6 +20,10 @@ const ExhibitSchema = new Schema(
             type: String,
             default: null,
         },
+        badge: {
+            type: String,
+            default: null,
+        },
         image: {
             type: String,
             required: true,

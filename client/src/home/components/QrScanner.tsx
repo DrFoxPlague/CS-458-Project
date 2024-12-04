@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import QrReader, { QRCode } from "react-qrcode-reader";
+import { Navigate } from "react-router-dom";
 
 export const QrScanner = () => {
     const [showScanner, setShowScanner] = useState(false);
@@ -16,6 +17,8 @@ export const QrScanner = () => {
         setScannedData(code.data);
         toggleScanner();
     };
+
+    if (scannedData) return <Navigate to={`/exhibit/${scannedData}`} />;
 
     return (
         <Stack

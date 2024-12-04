@@ -19,6 +19,26 @@ export const DeleteUser = gql`
     }
 `;
 
+export const AwardBadge = gql`
+    mutation AwardBadge($id: String!) {
+        awardBadge(id: $id) {
+            id
+            name
+            email
+            grade
+            dob
+            badges {
+                id
+                name
+                description
+                type
+            }
+            staff
+            profilePicture
+        }
+    }
+`;
+
 export const GetUser = gql`
     query GetUser($id: String!) {
         getUser(id: $id) {

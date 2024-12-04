@@ -1,14 +1,15 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { CheckQuestion, GetGame } from "../gql/games";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useOngoingGameStore } from "../stores/OngoingGame.store";
 import { Button, Stack, Typography } from "@mui/material";
 import { useAuthStore } from "../stores/Auth.store";
+import { AwardBadge } from "../gql/user";
 
 export const GamePage = () => {
     const navigate = useNavigate();
-    const { user } = useAuthStore();
+    const { user, setUser } = useAuthStore();
     const { id } = useParams(); // This is how you get the URL parameters in React Router
     const [feedbackType, setFeedbackType] = useState<
         "correct" | "wrong" | null
@@ -30,7 +31,6 @@ export const GamePage = () => {
         skip: !id || !user,
         onCompleted: (data) => {
             setOngoingGame(data.getGame);
-            setCurrentQuestion(0);
         },
     });
 
@@ -57,13 +57,29 @@ export const GamePage = () => {
         }
     );
 
+    const [awardBadge] = useMutation(AwardBadge, {
+        variables: {
+            id: game?.exhibit.badge?.id,
+        },
+        onCompleted: (data) => {
+            setUser(data.awardBadge);
+        },
+    });
+
     if (!user) return <Navigate to="/login" />; // Redirect to login page if the user is not logged in
     if (!id) return <Navigate to="/" />; // Redirect to 404 page if the URL parameter is missing
     if (loading) return <></>;
+    if (!game) return <Navigate to="/" />;
 
     const finishGame = () => {
         resetOngoingGame();
         resetCorrectAnswerCount();
+        if (
+            !user.badges.find((badge) => badge.id === game.exhibit.badge.id) &&
+            correstAnswerCount === game.questions.length
+        ) {
+            awardBadge();
+        }
         navigate("/");
     };
 
@@ -107,7 +123,7 @@ export const GamePage = () => {
                 </Typography>
             )}
             <Stack className="options w-full" direction="column" gap={2}>
-                {game.questions[currentQuestion].choices.map(
+                {game.questions[currentQuestion]?.choices.map(
                     (choice: string) => (
                         <Button
                             key={choice}

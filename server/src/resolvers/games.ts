@@ -4,6 +4,8 @@ import { GraphQLError } from "graphql";
 import GenID from "../util/GenID";
 import ExhibitModel from "../schemas/Exhibit";
 
+import shuffle from "lodash/shuffle";
+
 type GameDataInput = {
     name: string;
     subject: string;
@@ -37,14 +39,6 @@ export default {
                         },
                     });
                 }
-
-                // fetch questions
-                const questionSelection = [...game.questions];
-
-                // retrieve only 5 random questions
-                game.questions = questionSelection
-                    .sort(() => 0.5 - Math.random())
-                    .slice(0, 5);
 
                 return game;
             } catch (err) {

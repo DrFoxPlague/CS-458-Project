@@ -50,6 +50,9 @@ export const GetExhibit = gql`
                 id
             }
             image
+            badge {
+                id
+            }
         }
     }
 `;

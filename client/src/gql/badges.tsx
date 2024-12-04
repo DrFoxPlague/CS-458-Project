@@ -39,6 +39,12 @@ export const GetBadge = gql`
             id
             name
             description
+            exhibit {
+                id
+                name
+                description
+                image
+            }
             type
         }
     }

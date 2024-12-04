@@ -117,6 +117,11 @@ export const GetGame = gql`
                 question
                 choices
             }
+            exhibit {
+                badge {
+                    id
+                }
+            }
         }
     }
 `;
