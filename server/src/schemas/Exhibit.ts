@@ -1,43 +1,73 @@
 import { model, Schema, type InferSchemaType } from "mongoose";
 
-const ExhibitSchema = new Schema({
-    _id: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
+const ExhibitSchema = new Schema(
+    {
+        _id: {
+            type: String,
+            required: true,
+            unique: true,
+            index: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        content: {
+            title: {
+                type: String,
+                default: null,
+            },
+            body: {
+                type: String,
+                default: null,
+            },
+            image: {
+                type: String,
+                default: null,
+            },
+            audio: {
+                type: String,
+                default: null,
+            },
+            video: {
+                type: String,
+                default: null,
+            },
+        },
+        game: {
+            type: String,
+            default: null,
+        },
     },
-    ex_name: {
-        type: String,
-        required: true
-    },
-    content: {
-        title: {
-            type: String,
-            default: null
+    {
+        virtuals: {
+            id: {
+                get: function () {
+                    return this._id;
+                },
+                set: function (v: string) {
+                    this._id = v;
+                },
+            },
         },
-        body: {
-            type: String,
-            default: null
+        toJSON: {
+            virtuals: true,
+            transform: function (_, ret) {
+                delete ret._id;
+                delete ret.__v;
+                return ret;
+            },
         },
-        image: {
-            type: String,
-            default: null
+        toObject: {
+            virtuals: true,
+            transform: function (_, ret) {
+                delete ret._id;
+                delete ret.__v;
+                return ret;
+            },
         },
-        audio: {
-            type: String,
-            default: null
-        },
-        video: {
-            type: String,
-            default: null
-        }
-    },
-    game: {
-        type: String,
-        default: null
     }
-})
+);
 
 export type IExhibit = InferSchemaType<typeof ExhibitSchema>;
 

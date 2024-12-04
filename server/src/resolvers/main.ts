@@ -5,8 +5,14 @@ import exhibits from "./exhibits";
 import user from "./user";
 import games from "./games";
 import badges from "./badges";
+import google from "./auth";
+import UserModel from "../schemas/User";
+import BadgeModel from "../schemas/Badge";
 
 export const resolvers = {
+    User: {
+        badges: async (parent: any) => await BadgeModel.find({ _id: { $in: parent.badges } }),
+    },
     Query: {
         ...exhibits.Query,
         //...staff.Query,
@@ -19,6 +25,7 @@ export const resolvers = {
         //...staff.Mutation,
         ...user.Mutation,
         ...games.Mutation,
-        ...badges.Mutation
+        ...badges.Mutation,
+        ...google.Mutation
     }
 } as any;
