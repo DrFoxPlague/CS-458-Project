@@ -18,7 +18,7 @@ import { HomePage } from "./home/HomePage";
 import { GamePage } from "./pages/Game.page";
 
 const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
+    uri: import.meta.env.VITE_APP_URL!,
 });
 
 const authLink = setContext((_, { headers }) => {

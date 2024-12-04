@@ -27,3 +27,6 @@ dist-ssr
 *.deprecated.*
 .deprecated/
 *.deprecated
+
+# env
+*.env
