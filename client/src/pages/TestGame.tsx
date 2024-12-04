@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../assets/cits-logo.png';
 
 export const TestGame = () => {

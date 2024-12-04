@@ -123,7 +123,7 @@ export default {
 
                 await userDoc.save();
 
-                return user;
+                return userDoc;
             } catch (err) {
                 throw err;
             }
