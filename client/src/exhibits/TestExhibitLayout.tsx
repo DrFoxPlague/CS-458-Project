@@ -1,7 +1,7 @@
 import { Stack, Card, CardContent, CardMedia, Typography, Button, Paper } from "@mui/material";
 import image from "../assets/cits-bot.jpg"
 
-export const ExhibitLayout = () => {
+export const TestExhibitLayout = () => {
     return (
         <Stack className="w-full max-w-xl mx-auto p-4 space-y-4">
             <Card className="rounded-lg shadow-md overflow-hidden">

@@ -11,7 +11,7 @@ import { setContext } from "@apollo/client/link/context";
 import createHttpLink from "apollo-upload-client/createUploadLink.mjs";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorPage } from "./pages/ErrorPage";
-import { ExhibitLayout } from "./exhibits/ExhibitLayout";
+import { TestExhibitLayout } from "./exhibits/TestExhibitLayout";
 import { LoginPage, FollowUpPage } from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
 import { HomePage } from "./home/HomePage";
@@ -59,7 +59,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />           
                     <Route path="/test" element={<TestGame />} />
-                    <Route path="/exhibit" element={<ExhibitLayout />} />
+                    <Route path="/exhibit" element={<TestExhibitLayout />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<FollowUpPage />} />
                     <Route path="*" element={<ErrorPage />} />

@@ -55,11 +55,11 @@ export const HomePage = () => {
                 </Stack>
             </Stack>
             <Stack flexGrow={1} alignItems="center" className="bg-neutral-200 rounded-lg shadow-md overflow-hidden">
-                <Typography variant="h5" className="text-gray-600 !mx-2 text-center">
+                <Typography variant="h5" className="text-gray-600 !mx-2 pt-2 text-center">
                     Ready to Begin Your Journey?
                 </Typography>
                 <Button onClick={toggleScanner} variant="contained" color="primary">
-                    {showScanner ? "Hide Scanner" : "Show Scanner"}
+                    {showScanner ? "Cancel" : "Begin"}
                 </Button>
                 {showScanner && (
                     <Scanner onScan={(result) => console.log(result)} />
