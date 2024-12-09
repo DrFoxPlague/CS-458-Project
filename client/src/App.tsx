@@ -12,7 +12,7 @@ import createHttpLink from "apollo-upload-client/createUploadLink.mjs";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorPage } from "./pages/ErrorPage";
 import { ExhibitPage } from "./pages/Exhibit.page";
-import { LoginPage, FollowUpPage } from "./pages/LoginPage";
+import { LoginPage, FollowUpPage } from "./pages/Login.page";
 import { Toaster } from "react-hot-toast";
 import { HomePage } from "./home/HomePage";
 import { GamePage } from "./pages/Game.page";
