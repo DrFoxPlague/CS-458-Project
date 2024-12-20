@@ -1,6 +1,5 @@
 # Cosmos in the Stacks
 We are eager to explore self-guided interactive exhibits in the library stacks and curate an adventure through all the disciplines in the Library of Congress Classification system, expanding the representation of anthropology to zoology, improving the navigating, and understanding of library ranges as subjects to explore, encouraging curiosity, and fostering engagement. 
----
 
 #
 
