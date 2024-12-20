@@ -2,8 +2,12 @@
 We are eager to explore self-guided interactive exhibits in the library stacks and curate an adventure through all the disciplines in the Library of Congress Classification system, expanding the representation of anthropology to zoology, improving the navigating, and understanding of library ranges as subjects to explore, encouraging curiosity, and fostering engagement. 
 ---
 
+#
+
 ## What is CITS?
 This project was developed by a small software engineering team as a semester project for the class CS 458: Software Engineering.  It is a self-guided program that involves scanning QR codes, reading exhibit pages, and playing games related to what they've learned.
+
+#
 
 ## Team Members
 | **Member** | **Role** |
@@ -12,6 +16,8 @@ This project was developed by a small software engineering team as a semester pr
 | Dakota Donner | Quality Assurance / Backend / Database Manager |
 | Peter Ramos | Frontend / UI Design |
 | Jacob Huckins | Backend  |
+
+#
 
 ## Documentation
 - [Programmer's Manual](https://docs.google.com/document/d/1wJRkda4Knu70mK9lKPNltQ8cMyGqshMVixY0C_ukfls/edit?usp=sharing)
