@@ -8,6 +8,18 @@ This project was developed by a small software engineering team as a semester pr
 
 #
 
+## Tools Used
+| **Tool** | **Purpose** |
+| ----------- | :-----------: |
+| **ReactJS** | User interface |
+| **Tailwind CSS** | Streamlined UI styling |
+| **NodeJS** | Server |
+| **ExpressJS** | Server |
+| **MongoDB** | Database |
+| **GraphQL** | Middleware communication for front and back |
+
+
+
 ## Team Members
 | **Member** | **Role** |
 | ----------- | ----------- |
